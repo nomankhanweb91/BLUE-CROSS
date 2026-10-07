@@ -53,12 +53,12 @@
 
   <main>
     <!-- Page Header -->
-    <section class="section section-bg-subtle" style="padding: 48px 0 32px 0;">
+    <section class="section section-bg-subtle" style="padding: 42px 0 28px 0;">
       <div class="container text-center" style="text-align: center; max-width: 800px;">
         <span class="section-tag">मातृभाषा शिक्षण</span>
-        <h1 style="margin-bottom: 10px;">हिंदी वर्णमाला (स्वर एवं व्यंजन)</h1>
+        <h1 style="margin-bottom: 10px;">हिंदी वर्णमाला (स्वर एवं व्यंजन) ऑटो-लर्निंग</h1>
         <p class="lead">
-          अक्षर का शुद्ध उच्चारण सुनने के लिए <strong>🔊 उच्चारण सुनें</strong> बटन दबाएं और नीचे दिए गए अक्षरों से अभ्यास करें।
+          <strong>▶ PLAY &amp; ऑटो-लर्निंग</strong> बटन दबाएं! सिस्टम अपने आप एक-एक अक्षर का शुद्ध उच्चारण सुनाते हुए आगे बढ़ेगा।
         </p>
       </div>
     </section>
@@ -66,37 +66,77 @@
     <!-- Hindi Interactive Lesson Stage -->
     <section class="section section-bg-white" id="hindiLessonApp">
       <div class="container">
+        <!-- Companion Character Bubble -->
+        <div class="companion-bubble">
+          <div class="companion-avatar" id="companionAvatar">🦁</div>
+          <div class="companion-text-box">
+            <div class="companion-name" id="companionName">Leo 🦁 (साहसी साथी)</div>
+            <div class="companion-speech" id="companionSpeech">"चलो मिलकर हिंदी वर्णमाला सीखते हैं! PLAY दबाएं!"</div>
+          </div>
+        </div>
+
+        <!-- LearningPlayer HUD Toolbar -->
+        <div class="learning-player-hud">
+          <div class="player-controls-row">
+            <div class="player-main-btns">
+              <button class="btn btn-primary btn-lg" id="playerPlayBtn" style="padding: 12px 28px; box-shadow: 0 4px 14px rgba(22, 136, 232, 0.3);">
+                ▶ PLAY &amp; ऑटो-लर्निंग
+              </button>
+              <button class="btn btn-secondary btn-lg" id="playerPauseBtn" style="display: none; padding: 12px 24px;">
+                ⏸ PAUSE (रोकें)
+              </button>
+              <button class="btn btn-outline" id="playerPrevBtn" title="पिछला अक्षर">
+                ← पिछला
+              </button>
+              <button class="btn btn-outline" id="playerNextBtn" title="अगला अक्षर">
+                अगला →
+              </button>
+              <button class="btn btn-outline" id="playerReplayBtn" title="फिर से शुरू करें">
+                🔄 REPLAY
+              </button>
+            </div>
+
+            <div class="player-audio-toggles">
+              <button class="toggle-btn" id="playerVoiceToggle">
+                🔊 Voice ON
+              </button>
+              <button class="toggle-btn" id="playerMusicToggle">
+                🎵 Music ON
+              </button>
+            </div>
+          </div>
+
+          <!-- Progress Track -->
+          <div class="learning-progress-wrap">
+            <div class="learning-progress-track">
+              <div class="learning-progress-fill" id="playerProgressFill"></div>
+            </div>
+            <div class="learning-progress-text" id="playerProgressText">1 / 46</div>
+          </div>
+        </div>
+
         <div class="lesson-stage">
           <div class="lesson-screen">
             <!-- Visual Card (Emoji & Character) -->
-            <div class="lesson-visual-card">
-              <div class="lesson-char-big" id="hindiChar">अ</div>
+            <div class="lesson-visual-card" style="position: relative;">
+              <div class="lesson-char-big" id="hindiChar" style="animation: bounceChar 2s ease-in-out infinite;">अ</div>
               <div class="lesson-emoji-big" id="hindiEmoji">🍎</div>
             </div>
 
             <!-- Content & Audio Controls -->
             <div class="lesson-info-box">
-              <h2 id="hindiWord">अ से अनार</h2>
+              <h2 id="hindiWord" style="color: #1688E8; font-size: 2.3rem;">अ से अनार</h2>
               <span class="phonetic-tag" id="hindiPhonics">a - Anar</span>
 
-              <div class="lesson-example-sentence" id="hindiDetail">
+              <div class="lesson-example-sentence" id="hindiDetail" style="font-size: 1.15rem; line-height: 1.6;">
                 अ से अनार, लाल-लाल मीठे दानेदार फल।
               </div>
 
               <!-- Controls -->
-              <div class="lesson-controls">
-                <button class="btn btn-primary btn-lg" id="hindiSpeakBtn">
-                  <span>🔊</span> उच्चारण सुनें (Listen)
+              <div style="margin-top: 18px;">
+                <button class="btn btn-primary" onclick="speakText(document.getElementById('hindiChar').textContent + ' से ' + document.getElementById('hindiWord').textContent + '। ' + document.getElementById('hindiDetail').textContent, 'hi-IN')">
+                  <span>🔊</span> उच्चारण फिर से सुनें
                 </button>
-                <button class="btn btn-outline" id="hindiPrevBtn">
-                  ← पिछला (Previous)
-                </button>
-                <button class="btn btn-outline" id="hindiNextBtn">
-                  अगला (Next) →
-                </button>
-                <a href="games.html" class="btn btn-secondary">
-                  🎯 अभ्यास खेल (Practice Quiz)
-                </a>
               </div>
             </div>
           </div>
@@ -104,7 +144,7 @@
           <!-- Selector Grid -->
           <div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border-light);">
             <div style="font-size: 0.95rem; font-weight: 700; color: #5F7180; margin-bottom: 8px;">
-              अक्षर चुनें (स्वर एवं मुख्य व्यंजन):
+              सीधे किसी भी अक्षर पर जाएं (स्वर एवं व्यंजन):
             </div>
             <div class="alphabet-selector-grid" id="hindiSelectorGrid">
               <!-- Rendered via JS -->
@@ -198,6 +238,10 @@
 
       <div class="footer-bottom">
         <div>&copy; 2026 BLUE CROSS. All rights reserved. Free learning for every child.</div>
+        <div class="footer-visitor-badge">
+          <span class="beacon-dot"></span>
+          <span>👥 Total Community Visitors: <strong class="footer-visitor-count">18,490+</strong></span>
+        </div>
         <div class="footer-legal-links">
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="terms.html">Terms of Use</a>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#F4FAFF"/>
+  <!-- Decorative background circles -->
+  <circle cx="80" cy="60" r="45" fill="#EAF6FF"/>
+  <circle cx="330" cy="70" r="35" fill="#FEF3C7"/>
+  <!-- Stack of colourful books -->
+  <rect x="130" y="165" width="140" height="24" rx="4" fill="#1688E8"/>
+  <rect x="135" y="168" width="130" height="6" rx="2" fill="#93C5FD"/>
+  <rect x="140" y="142" width="120" height="23" rx="4" fill="#EA580C"/>
+  <rect x="145" y="145" width="110" height="6" rx="2" fill="#FDBA74"/>
+  <rect x="150" y="120" width="100" height="22" rx="4" fill="#10B981"/>
+  <rect x="155" y="123" width="90" height="6" rx="2" fill="#6EE7B7"/>
+  <!-- Open Book held by children -->
+  <path d="M120 100 C155 88 190 95 200 102 C210 95 245 88 280 100 L275 125 C240 115 210 120 200 125 C190 120 160 115 125 125 Z" fill="#FFFFFF" stroke="#1688E8" stroke-width="2.5"/>
+  <line x1="200" y1="102" x2="200" y2="125" stroke="#1688E8" stroke-width="2.5"/>
+  <!-- Cheerful Kid Left -->
+  <circle cx="95" cy="115" r="26" fill="#FCD34D"/>
+  <path d="M75 110 C75 85 115 85 115 110 C105 95 85 95 75 110 Z" fill="#172B3A"/>
+  <circle cx="88" cy="115" r="2.5" fill="#172B3A"/>
+  <circle cx="102" cy="115" r="2.5" fill="#172B3A"/>
+  <path d="M91 123 Q95 128 99 123" stroke="#172B3A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M72 155 C72 138 118 138 118 155 L118 185 L72 185 Z" fill="#45B5F5"/>
+  <!-- Cheerful Kid Right -->
+  <circle cx="305" cy="115" r="26" fill="#FCD34D"/>
+  <path d="M285 110 C285 85 325 85 325 110 C315 95 295 95 285 110 Z" fill="#7C2D12"/>
+  <circle cx="298" cy="115" r="2.5" fill="#172B3A"/>
+  <circle cx="312" cy="115" r="2.5" fill="#172B3A"/>
+  <path d="M301 123 Q305 128 309 123" stroke="#172B3A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M282 155 C282 138 328 138 328 155 L328 185 L282 185 Z" fill="#EC4899"/>
+  <!-- Floating reading stars and joyful hearts -->
+  <path d="M195 55 Q200 45 205 55 Q215 60 205 65 Q200 75 195 65 Q185 60 195 55 Z" fill="#F59E0B"/>
+  <path d="M230 45 C230 40 236 38 240 42 C244 38 250 40 250 45 C250 52 240 58 240 58 C240 58 230 52 230 45 Z" fill="#EF4444"/>
+  <!-- Badge -->
+  <rect x="20" y="16" width="145" height="26" rx="13" fill="#FFFFFF" stroke="#C5E3FB"/>
+  <text x="32" y="33" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#EA580C">📖 Books for Every Child</text>
+</svg>

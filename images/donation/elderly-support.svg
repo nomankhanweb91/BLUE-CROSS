@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#F4FAFF"/>
+  <!-- Decorative background -->
+  <circle cx="90" cy="65" r="45" fill="#EAF6FF"/>
+  <circle cx="330" cy="55" r="35" fill="#FEF3C7"/>
+  <!-- Comfortable Armchair -->
+  <rect x="90" y="145" width="130" height="45" rx="8" fill="#C5E3FB"/>
+  <rect x="80" y="125" width="25" height="65" rx="8" fill="#93C5FD"/>
+  <rect x="205" y="125" width="25" height="65" rx="8" fill="#93C5FD"/>
+  <!-- Elderly Person Character: Peaceful, smiling grandmother / grandfather -->
+  <circle cx="155" cy="85" r="28" fill="#FDE68A"/>
+  <!-- Silver / White Hair -->
+  <path d="M130 80 C130 52 180 52 180 80 C170 65 140 65 130 80 Z" fill="#E2E8F0"/>
+  <!-- Kind spectacles -->
+  <circle cx="147" cy="85" r="6" stroke="#475569" stroke-width="2" fill="none"/>
+  <circle cx="163" cy="85" r="6" stroke="#475569" stroke-width="2" fill="none"/>
+  <line x1="153" y1="85" x2="157" y2="85" stroke="#475569" stroke-width="2"/>
+  <!-- Kind Smile -->
+  <path d="M150 96 Q155 101 160 96" stroke="#172B3A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Warm wool blanket wrapped around shoulders -->
+  <path d="M125 115 C125 105 185 105 185 115 L190 170 L120 170 Z" fill="#0D9488"/>
+  <line x1="125" y1="130" x2="185" y2="130" stroke="#5EEAD4" stroke-width="3"/>
+  <line x1="125" y1="145" x2="185" y2="145" stroke="#FDE047" stroke-width="3"/>
+  <!-- Caring Young Volunteer offering warm tea / care package -->
+  <circle cx="280" cy="90" r="26" fill="#FCD34D"/>
+  <path d="M258 85 C258 65 302 65 302 85 C295 72 265 72 258 85 Z" fill="#172B3A"/>
+  <!-- Cheerful caring expression -->
+  <circle cx="273" cy="90" r="2.5" fill="#172B3A"/>
+  <circle cx="287" cy="90" r="2.5" fill="#172B3A"/>
+  <path d="M276 98 Q280 103 284 98" stroke="#172B3A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M255 125 C255 112 305 112 305 125 L310 185 L250 185 Z" fill="#1688E8"/>
+  <!-- Warm Tea Cup being served -->
+  <path d="M215 130 C215 145 235 145 235 130 Z" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5"/>
+  <line x1="225" y1="124" x2="225" y2="118" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="220" y1="126" x2="218" y2="120" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Heart symbol of care -->
+  <path d="M245 60 C245 52 253 50 258 55 C263 50 271 52 271 60 C271 70 258 78 258 78 C258 78 245 70 245 60 Z" fill="#EF4444"/>
+  <!-- Badge -->
+  <rect x="20" y="16" width="165" height="26" rx="13" fill="#FFFFFF" stroke="#C5E3FB"/>
+  <text x="32" y="33" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#0D9488">🧓 Respect &amp; Elder Care</text>
+</svg>

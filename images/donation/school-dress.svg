@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#F4FAFF"/>
+  <!-- Decorative background -->
+  <circle cx="320" cy="60" r="35" fill="#FEF3C7"/>
+  <circle cx="80" cy="70" r="40" fill="#EAF6FF"/>
+  <!-- School Uniform Set: Shirt, Tie, Skirt/Shorts on display -->
+  <rect x="70" y="80" width="100" height="110" rx="10" fill="#FFFFFF" stroke="#C5E3FB" stroke-width="2"/>
+  <!-- Uniform Shirt -->
+  <path d="M95 100 L80 120 L95 130 L100 115 L100 155 L140 155 L140 115 L145 130 L160 120 L145 100 Z" fill="#EEF7FF" stroke="#1688E8" stroke-width="2"/>
+  <!-- Collar & Red Tie -->
+  <polygon points="112,100 120,110 128,100" fill="#FFFFFF" stroke="#1688E8" stroke-width="1.5"/>
+  <polygon points="117,108 123,108 124,135 120,142 116,135" fill="#EF4444"/>
+  <!-- Proud student in full uniform -->
+  <circle cx="270" cy="80" r="28" fill="#FCD34D"/>
+  <path d="M245 75 C245 50 295 50 295 75 C285 60 255 60 245 75 Z" fill="#172B3A"/>
+  <!-- Eyes & Big Proud Smile -->
+  <circle cx="262" cy="80" r="2.5" fill="#172B3A"/>
+  <circle cx="278" cy="80" r="2.5" fill="#172B3A"/>
+  <path d="M265 88 Q270 94 275 88" stroke="#172B3A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Uniform Shirt & Tie worn -->
+  <path d="M240 110 C240 98 300 98 300 110 L305 160 L235 160 Z" fill="#FFFFFF" stroke="#1688E8" stroke-width="2"/>
+  <polygon points="267,108 273,108 275,138 270,146 265,138" fill="#EF4444"/>
+  <!-- Uniform Trouser / Skirt -->
+  <path d="M238 160 L302 160 L306 198 L272 198 L270 175 L268 198 L234 198 Z" fill="#1E3A8A"/>
+  <!-- Clean School Bag on shoulder -->
+  <rect x="290" y="115" width="22" height="42" rx="6" fill="#10B981" stroke="#047857" stroke-width="1.5"/>
+  <!-- Stars of confidence -->
+  <polygon points="200,60 203,66 210,66 205,70 207,76 200,72 193,76 195,70 190,66 197,66" fill="#F59E0B"/>
+  <!-- Badge -->
+  <rect x="20" y="16" width="165" height="26" rx="13" fill="#FFFFFF" stroke="#C5E3FB"/>
+  <text x="32" y="33" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#1E3A8A">👔 Dignified School Dress</text>
+</svg>

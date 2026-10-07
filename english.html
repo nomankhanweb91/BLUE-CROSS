@@ -53,12 +53,12 @@
 
   <main>
     <!-- Page Header -->
-    <section class="section section-bg-subtle" style="padding: 48px 0 32px 0;">
+    <section class="section section-bg-subtle" style="padding: 42px 0 28px 0;">
       <div class="container text-center" style="text-align: center; max-width: 800px;">
-        <span class="section-tag">Early Literacy</span>
-        <h1 style="margin-bottom: 10px;">Interactive English A to Z</h1>
+        <span class="section-tag">Children's Phonics Academy</span>
+        <h1 style="margin-bottom: 10px;">English A to Z Auto-Learning</h1>
         <p class="lead">
-          Tap <strong>🔊 Listen</strong> to hear native pronunciation, use <strong>Previous</strong> &amp; <strong>Next</strong> to navigate, or select any letter below.
+          Tap <strong>▶ PLAY &amp; START LEARNING</strong> below. The player will automatically guide your child from A to Z with cheerful background music and clear voice narration!
         </p>
       </div>
     </section>
@@ -66,20 +66,69 @@
     <!-- Interactive Lesson Stage -->
     <section class="section section-bg-white" id="englishLessonApp">
       <div class="container">
+        <!-- Learning Companion Bubble -->
+        <div class="companion-bubble">
+          <div class="companion-avatar" id="companionAvatar">🦉</div>
+          <div class="companion-text-box">
+            <div class="companion-name" id="companionName">Kuku 🦉 (Wise Owl)</div>
+            <div class="companion-speech" id="companionSpeech">"Click PLAY to start our phonics journey! Let's learn A to Z together!"</div>
+          </div>
+        </div>
+
+        <!-- LearningPlayer HUD Toolbar -->
+        <div class="learning-player-hud">
+          <div class="player-controls-row">
+            <div class="player-main-btns">
+              <button class="btn btn-primary btn-lg" id="playerPlayBtn" style="padding: 12px 28px; box-shadow: 0 4px 14px rgba(22, 136, 232, 0.3);">
+                ▶ PLAY &amp; AUTO-LEARN
+              </button>
+              <button class="btn btn-secondary btn-lg" id="playerPauseBtn" style="display: none; padding: 12px 24px;">
+                ⏸ PAUSE
+              </button>
+              <button class="btn btn-outline" id="playerPrevBtn" title="Previous Letter">
+                ← PREVIOUS
+              </button>
+              <button class="btn btn-outline" id="playerNextBtn" title="Next Letter">
+                NEXT →
+              </button>
+              <button class="btn btn-outline" id="playerReplayBtn" title="Start Over">
+                🔄 REPLAY
+              </button>
+            </div>
+
+            <div class="player-audio-toggles">
+              <button class="toggle-btn" id="playerVoiceToggle">
+                🔊 Voice ON
+              </button>
+              <button class="toggle-btn" id="playerMusicToggle">
+                🎵 Music ON
+              </button>
+            </div>
+          </div>
+
+          <!-- Progress Track -->
+          <div class="learning-progress-wrap">
+            <div class="learning-progress-track">
+              <div class="learning-progress-fill" id="playerProgressFill"></div>
+            </div>
+            <div class="learning-progress-text" id="playerProgressText">1 / 26</div>
+          </div>
+        </div>
+
         <div class="lesson-stage">
           <div class="lesson-screen">
             <!-- Visual Card (Emoji & Character) -->
-            <div class="lesson-visual-card">
-              <div class="lesson-char-big" id="engLetterChar">A</div>
-              <div class="lesson-emoji-big" id="engLetterEmoji">🍎</div>
+            <div class="lesson-visual-card" style="position: relative;">
+              <div class="lesson-char-big" id="engLetterChar" style="animation: bounceChar 2s ease-in-out infinite;">A</div>
+              <div class="lesson-emoji-big" id="engLetterEmoji" style="transition: transform 0.4s ease;">🍎</div>
             </div>
 
             <!-- Content & Audio Controls -->
             <div class="lesson-info-box">
-              <h2 id="engLetterWord">A for Apple</h2>
+              <h2 id="engLetterWord" style="color: #1688E8; font-size: 2.3rem;">A for Apple</h2>
               <span class="phonetic-tag" id="engLetterPhonics">/æ-pəl/</span>
 
-              <p id="engLetterExp" style="font-size: 1.1rem; margin-bottom: 16px; color: #172B3A;">
+              <p id="engLetterExp" style="font-size: 1.15rem; margin-bottom: 16px; color: #172B3A; line-height: 1.6;">
                 A sweet, round fruit that grows on trees. Often red or green.
               </p>
 
@@ -87,16 +136,9 @@
                 "An apple a day keeps the doctor away."
               </div>
 
-              <!-- Interactive Buttons -->
-              <div class="lesson-controls">
-                <button class="btn btn-primary btn-lg" id="engSpeakBtn">
-                  <span>🔊</span> Listen &amp; Speak
-                </button>
-                <button class="btn btn-outline" id="engPrevBtn">
-                  ← Previous
-                </button>
-                <button class="btn btn-outline" id="engNextBtn">
-                  Next →
+              <div style="margin-top: 18px;">
+                <button class="btn btn-primary" onclick="speakWord(document.getElementById('engLetterWord').textContent + '. ' + document.getElementById('engLetterSentence').textContent)">
+                  <span>🔊</span> Listen Pronunciation Again
                 </button>
               </div>
             </div>
@@ -105,7 +147,7 @@
           <!-- Quick Selector Grid (A to Z) -->
           <div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border-light);">
             <div style="font-size: 0.95rem; font-weight: 700; color: #5F7180; margin-bottom: 8px;">
-              Jump to any letter (A - Z):
+              Jump directly to any letter:
             </div>
             <div class="alphabet-selector-grid" id="englishSelectorGrid">
               <!-- Rendered via JS -->
@@ -199,6 +241,10 @@
 
       <div class="footer-bottom">
         <div>&copy; 2026 BLUE CROSS. All rights reserved. Free learning for every child.</div>
+        <div class="footer-visitor-badge">
+          <span class="beacon-dot"></span>
+          <span>👥 Total Community Visitors: <strong class="footer-visitor-count">18,490+</strong></span>
+        </div>
         <div class="footer-legal-links">
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="terms.html">Terms of Use</a>

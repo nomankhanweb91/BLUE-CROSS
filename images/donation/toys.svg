@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#F4FAFF"/>
+  <!-- Decorative background -->
+  <circle cx="80" cy="65" r="40" fill="#EAF6FF"/>
+  <circle cx="330" cy="65" r="35" fill="#FEF3C7"/>
+  <!-- Educational Building Blocks (A, B, C, 1, 2) -->
+  <rect x="90" y="150" width="46" height="46" rx="6" fill="#EF4444"/>
+  <text x="105" y="181" font-family="system-ui, sans-serif" font-size="24" font-weight="900" fill="#FFFFFF">A</text>
+  <rect x="140" y="150" width="46" height="46" rx="6" fill="#3B82F6"/>
+  <text x="156" y="181" font-family="system-ui, sans-serif" font-size="24" font-weight="900" fill="#FFFFFF">B</text>
+  <rect x="115" y="105" width="46" height="46" rx="6" fill="#10B981"/>
+  <text x="130" y="136" font-family="system-ui, sans-serif" font-size="24" font-weight="900" fill="#FFFFFF">C</text>
+  <!-- Teddy Bear -->
+  <!-- Ears -->
+  <circle cx="215" cy="115" r="10" fill="#92400E"/>
+  <circle cx="215" cy="115" r="6" fill="#FDE68A"/>
+  <circle cx="255" cy="115" r="10" fill="#92400E"/>
+  <circle cx="255" cy="115" r="6" fill="#FDE68A"/>
+  <!-- Head -->
+  <circle cx="235" cy="135" r="24" fill="#B45309"/>
+  <!-- Snout -->
+  <ellipse cx="235" cy="142" rx="12" ry="9" fill="#FDE68A"/>
+  <ellipse cx="235" cy="138" rx="4" ry="3" fill="#172B3A"/>
+  <path d="M232 143 Q235 146 238 143" stroke="#172B3A" stroke-width="1.5" fill="none"/>
+  <!-- Eyes -->
+  <circle cx="227" cy="132" r="2.5" fill="#172B3A"/>
+  <circle cx="243" cy="132" r="2.5" fill="#172B3A"/>
+  <!-- Body -->
+  <ellipse cx="235" cy="172" rx="22" ry="24" fill="#B45309"/>
+  <ellipse cx="235" cy="172" rx="14" ry="16" fill="#FDE68A"/>
+  <!-- Child smiling and hugging learning toy -->
+  <circle cx="315" cy="95" r="28" fill="#FCD34D"/>
+  <path d="M290 90 C290 65 340 65 340 90 C330 75 300 75 290 90 Z" fill="#7C2D12"/>
+  <circle cx="307" cy="95" r="2.5" fill="#172B3A"/>
+  <circle cx="323" cy="95" r="2.5" fill="#172B3A"/>
+  <path d="M311 103 Q315 109 319 103" stroke="#172B3A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M290 135 C290 120 340 120 340 135 L345 190 L285 190 Z" fill="#EC4899"/>
+  <!-- Sparkles -->
+  <polygon points="190,75 192,80 197,80 193,83 195,88 190,85 185,88 187,83 183,80 188,80" fill="#F59E0B"/>
+  <!-- Badge -->
+  <rect x="20" y="16" width="165" height="26" rx="13" fill="#FFFFFF" stroke="#C5E3FB"/>
+  <text x="32" y="33" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#EA580C">🧸 Educational Play &amp; Toys</text>
+</svg>

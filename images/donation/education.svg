@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#F4FAFF"/>
+  <!-- Decorative background elements -->
+  <circle cx="340" cy="50" r="40" fill="#EAF6FF"/>
+  <circle cx="340" cy="50" r="26" fill="#FEF3C7"/>
+  <path d="M340 18V26M340 74V82M308 50H316M364 50H372" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
+  <!-- Desk -->
+  <rect x="40" y="170" width="320" height="20" rx="6" fill="#E1EDF5"/>
+  <rect x="60" y="190" width="16" height="50" fill="#C5E3FB"/>
+  <rect x="324" y="190" width="16" height="50" fill="#C5E3FB"/>
+  <!-- Open Book on Desk -->
+  <path d="M140 170 C170 162 195 168 200 172 C205 168 230 162 260 170 L255 186 C225 178 205 182 200 185 C195 182 175 178 145 186 Z" fill="#FFFFFF" stroke="#1688E8" stroke-width="2"/>
+  <line x1="200" y1="172" x2="200" y2="185" stroke="#1688E8" stroke-width="2"/>
+  <line x1="160" y1="173" x2="190" y2="173" stroke="#93C5FD" stroke-width="1.5"/>
+  <line x1="160" y1="178" x2="185" y2="178" stroke="#93C5FD" stroke-width="1.5"/>
+  <line x1="210" y1="173" x2="240" y2="173" stroke="#93C5FD" stroke-width="1.5"/>
+  <line x1="215" y1="178" x2="240" y2="178" stroke="#93C5FD" stroke-width="1.5"/>
+  <!-- Pencil Holder -->
+  <rect x="280" y="148" width="22" height="24" rx="4" fill="#45B5F5"/>
+  <line x1="285" y1="148" x2="282" y2="135" stroke="#EA580C" stroke-width="3" stroke-linecap="round"/>
+  <line x1="292" y1="148" x2="294" y2="130" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+  <!-- Child Character: Happy Studying Child -->
+  <!-- Body / Clothes -->
+  <path d="M165 145 C165 125 235 125 235 145 L238 175 L162 175 Z" fill="#1688E8"/>
+  <path d="M185 125 L200 145 L215 125 Z" fill="#FFFFFF"/>
+  <!-- Head -->
+  <circle cx="200" cy="95" r="32" fill="#FCD34D"/>
+  <!-- Hair -->
+  <path d="M168 92 C168 62 232 62 232 92 C220 75 180 75 168 92 Z" fill="#172B3A"/>
+  <!-- Happy Eyes -->
+  <path d="M188 95 C188 92 194 92 194 95" stroke="#172B3A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M206 95 C206 92 212 92 212 95" stroke="#172B3A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Smiling Mouth -->
+  <path d="M194 105 Q200 114 206 105" stroke="#172B3A" stroke-width="2.5" stroke-linecap="round" fill="#EA580C"/>
+  <!-- Rosy Cheeks -->
+  <circle cx="184" cy="103" r="4" fill="#F87171" opacity="0.6"/>
+  <circle cx="216" cy="103" r="4" fill="#F87171" opacity="0.6"/>
+  <!-- Educational Sparkles & Stars -->
+  <polygon points="90,70 93,78 101,78 95,83 97,91 90,86 83,91 85,83 79,78 87,78" fill="#F59E0B"/>
+  <polygon points="120,40 122,46 128,46 123,50 125,56 120,52 115,56 117,50 112,46 118,46" fill="#10B981"/>
+  <!-- Label / Badge -->
+  <rect x="20" y="16" width="150" height="26" rx="13" fill="#FFFFFF" stroke="#C5E3FB"/>
+  <text x="32" y="33" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#1688E8">✨ Every Child Learning</text>
+</svg>

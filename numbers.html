@@ -66,6 +66,15 @@
     <!-- Interactive 1-10 Stage -->
     <section class="section section-bg-white" id="numbersLessonApp">
       <div class="container">
+        <!-- Companion Character Bubble -->
+        <div class="companion-bubble" style="margin-bottom: 28px;">
+          <div class="companion-avatar">🐰</div>
+          <div class="companion-text-box">
+            <div class="companion-name">Bunny Bholu 🐰 (Math Companion)</div>
+            <div class="companion-speech">"Let's count stars and numbers together! Tap any number button below to see counting stars and hear Hindi &amp; English numbers!"</div>
+          </div>
+        </div>
+
         <div class="lesson-stage">
           <div class="lesson-screen">
             <!-- Visual Counter Board -->
@@ -107,6 +116,159 @@
             </div>
             <div class="alphabet-selector-grid" id="numbersSelectorGrid">
               <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multiplication Tables 2 to 8 Section -->
+    <section class="section section-bg-white" id="multiplicationTablesSection">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">गुणा पहाड़े (Multiplication Tables)</span>
+          <h2>Learn Tables 2 to 8 with Voice</h2>
+          <p>Click <strong>▶ Play Table</strong> on any card to hear the complete table narrated in Hindi equation-by-equation with live highlight!</p>
+        </div>
+
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+          <!-- Table 2 -->
+          <div class="table-play-card" id="tableContainer-2">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h3 style="color: #1688E8; font-size: 1.3rem;">Table of 2 (२ का पहाड़ा)</h3>
+              <button class="btn btn-primary btn-sm" onclick="playMultiplicationTable(2)">▶ Play Table</button>
+            </div>
+            <div class="table-steps-list">
+              <div class="table-step-row"><span>2 × 1</span> <span>= 2</span></div>
+              <div class="table-step-row"><span>2 × 2</span> <span>= 4</span></div>
+              <div class="table-step-row"><span>2 × 3</span> <span>= 6</span></div>
+              <div class="table-step-row"><span>2 × 4</span> <span>= 8</span></div>
+              <div class="table-step-row"><span>2 × 5</span> <span>= 10</span></div>
+              <div class="table-step-row"><span>2 × 6</span> <span>= 12</span></div>
+              <div class="table-step-row"><span>2 × 7</span> <span>= 14</span></div>
+              <div class="table-step-row"><span>2 × 8</span> <span>= 16</span></div>
+              <div class="table-step-row"><span>2 × 9</span> <span>= 18</span></div>
+              <div class="table-step-row"><span>2 × 10</span> <span>= 20</span></div>
+            </div>
+          </div>
+
+          <!-- Table 3 -->
+          <div class="table-play-card" id="tableContainer-3">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h3 style="color: #1688E8; font-size: 1.3rem;">Table of 3 (३ का पहाड़ा)</h3>
+              <button class="btn btn-primary btn-sm" onclick="playMultiplicationTable(3)">▶ Play Table</button>
+            </div>
+            <div class="table-steps-list">
+              <div class="table-step-row"><span>3 × 1</span> <span>= 3</span></div>
+              <div class="table-step-row"><span>3 × 2</span> <span>= 6</span></div>
+              <div class="table-step-row"><span>3 × 3</span> <span>= 9</span></div>
+              <div class="table-step-row"><span>3 × 4</span> <span>= 12</span></div>
+              <div class="table-step-row"><span>3 × 5</span> <span>= 15</span></div>
+              <div class="table-step-row"><span>3 × 6</span> <span>= 18</span></div>
+              <div class="table-step-row"><span>3 × 7</span> <span>= 21</span></div>
+              <div class="table-step-row"><span>3 × 8</span> <span>= 24</span></div>
+              <div class="table-step-row"><span>3 × 9</span> <span>= 27</span></div>
+              <div class="table-step-row"><span>3 × 10</span> <span>= 30</span></div>
+            </div>
+          </div>
+
+          <!-- Table 4 -->
+          <div class="table-play-card" id="tableContainer-4">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h3 style="color: #1688E8; font-size: 1.3rem;">Table of 4 (४ का पहाड़ा)</h3>
+              <button class="btn btn-primary btn-sm" onclick="playMultiplicationTable(4)">▶ Play Table</button>
+            </div>
+            <div class="table-steps-list">
+              <div class="table-step-row"><span>4 × 1</span> <span>= 4</span></div>
+              <div class="table-step-row"><span>4 × 2</span> <span>= 8</span></div>
+              <div class="table-step-row"><span>4 × 3</span> <span>= 12</span></div>
+              <div class="table-step-row"><span>4 × 4</span> <span>= 16</span></div>
+              <div class="table-step-row"><span>4 × 5</span> <span>= 20</span></div>
+              <div class="table-step-row"><span>4 × 6</span> <span>= 24</span></div>
+              <div class="table-step-row"><span>4 × 7</span> <span>= 28</span></div>
+              <div class="table-step-row"><span>4 × 8</span> <span>= 32</span></div>
+              <div class="table-step-row"><span>4 × 9</span> <span>= 36</span></div>
+              <div class="table-step-row"><span>4 × 10</span> <span>= 40</span></div>
+            </div>
+          </div>
+
+          <!-- Table 5 -->
+          <div class="table-play-card" id="tableContainer-5">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h3 style="color: #1688E8; font-size: 1.3rem;">Table of 5 (५ का पहाड़ा)</h3>
+              <button class="btn btn-primary btn-sm" onclick="playMultiplicationTable(5)">▶ Play Table</button>
+            </div>
+            <div class="table-steps-list">
+              <div class="table-step-row"><span>5 × 1</span> <span>= 5</span></div>
+              <div class="table-step-row"><span>5 × 2</span> <span>= 10</span></div>
+              <div class="table-step-row"><span>5 × 3</span> <span>= 15</span></div>
+              <div class="table-step-row"><span>5 × 4</span> <span>= 20</span></div>
+              <div class="table-step-row"><span>5 × 5</span> <span>= 25</span></div>
+              <div class="table-step-row"><span>5 × 6</span> <span>= 30</span></div>
+              <div class="table-step-row"><span>5 × 7</span> <span>= 35</span></div>
+              <div class="table-step-row"><span>5 × 8</span> <span>= 40</span></div>
+              <div class="table-step-row"><span>5 × 9</span> <span>= 45</span></div>
+              <div class="table-step-row"><span>5 × 10</span> <span>= 50</span></div>
+            </div>
+          </div>
+
+          <!-- Table 6 -->
+          <div class="table-play-card" id="tableContainer-6">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h3 style="color: #1688E8; font-size: 1.3rem;">Table of 6 (६ का पहाड़ा)</h3>
+              <button class="btn btn-primary btn-sm" onclick="playMultiplicationTable(6)">▶ Play Table</button>
+            </div>
+            <div class="table-steps-list">
+              <div class="table-step-row"><span>6 × 1</span> <span>= 6</span></div>
+              <div class="table-step-row"><span>6 × 2</span> <span>= 12</span></div>
+              <div class="table-step-row"><span>6 × 3</span> <span>= 18</span></div>
+              <div class="table-step-row"><span>6 × 4</span> <span>= 24</span></div>
+              <div class="table-step-row"><span>6 × 5</span> <span>= 30</span></div>
+              <div class="table-step-row"><span>6 × 6</span> <span>= 36</span></div>
+              <div class="table-step-row"><span>6 × 7</span> <span>= 42</span></div>
+              <div class="table-step-row"><span>6 × 8</span> <span>= 48</span></div>
+              <div class="table-step-row"><span>6 × 9</span> <span>= 54</span></div>
+              <div class="table-step-row"><span>6 × 10</span> <span>= 60</span></div>
+            </div>
+          </div>
+
+          <!-- Table 7 -->
+          <div class="table-play-card" id="tableContainer-7">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h3 style="color: #1688E8; font-size: 1.3rem;">Table of 7 (७ का पहाड़ा)</h3>
+              <button class="btn btn-primary btn-sm" onclick="playMultiplicationTable(7)">▶ Play Table</button>
+            </div>
+            <div class="table-steps-list">
+              <div class="table-step-row"><span>7 × 1</span> <span>= 7</span></div>
+              <div class="table-step-row"><span>7 × 2</span> <span>= 14</span></div>
+              <div class="table-step-row"><span>7 × 3</span> <span>= 21</span></div>
+              <div class="table-step-row"><span>7 × 4</span> <span>= 28</span></div>
+              <div class="table-step-row"><span>7 × 5</span> <span>= 35</span></div>
+              <div class="table-step-row"><span>7 × 6</span> <span>= 42</span></div>
+              <div class="table-step-row"><span>7 × 7</span> <span>= 49</span></div>
+              <div class="table-step-row"><span>7 × 8</span> <span>= 56</span></div>
+              <div class="table-step-row"><span>7 × 9</span> <span>= 63</span></div>
+              <div class="table-step-row"><span>7 × 10</span> <span>= 70</span></div>
+            </div>
+          </div>
+
+          <!-- Table 8 -->
+          <div class="table-play-card" id="tableContainer-8">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h3 style="color: #1688E8; font-size: 1.3rem;">Table of 8 (८ का पहाड़ा)</h3>
+              <button class="btn btn-primary btn-sm" onclick="playMultiplicationTable(8)">▶ Play Table</button>
+            </div>
+            <div class="table-steps-list">
+              <div class="table-step-row"><span>8 × 1</span> <span>= 8</span></div>
+              <div class="table-step-row"><span>8 × 2</span> <span>= 16</span></div>
+              <div class="table-step-row"><span>8 × 3</span> <span>= 24</span></div>
+              <div class="table-step-row"><span>8 × 4</span> <span>= 32</span></div>
+              <div class="table-step-row"><span>8 × 5</span> <span>= 40</span></div>
+              <div class="table-step-row"><span>8 × 6</span> <span>= 48</span></div>
+              <div class="table-step-row"><span>8 × 7</span> <span>= 56</span></div>
+              <div class="table-step-row"><span>8 × 8</span> <span>= 64</span></div>
+              <div class="table-step-row"><span>8 × 9</span> <span>= 72</span></div>
+              <div class="table-step-row"><span>8 × 10</span> <span>= 80</span></div>
             </div>
           </div>
         </div>
@@ -240,6 +402,10 @@
 
       <div class="footer-bottom">
         <div>&copy; 2026 BLUE CROSS. All rights reserved. Free learning for every child.</div>
+        <div class="footer-visitor-badge">
+          <span class="beacon-dot"></span>
+          <span>👥 Total Community Visitors: <strong class="footer-visitor-count">18,490+</strong></span>
+        </div>
         <div class="footer-legal-links">
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="terms.html">Terms of Use</a>

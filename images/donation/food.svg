@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#F4FAFF"/>
+  <!-- Background warm sun -->
+  <circle cx="330" cy="55" r="35" fill="#FEF3C7"/>
+  <!-- Table surface -->
+  <rect x="40" y="175" width="320" height="15" rx="5" fill="#E1EDF5"/>
+  <!-- Healthy Meal Bowl -->
+  <path d="M140 145 C140 185 260 185 260 145 Z" fill="#FFFFFF" stroke="#1688E8" stroke-width="2.5"/>
+  <ellipse cx="200" cy="145" rx="60" ry="14" fill="#FDE68A" stroke="#F59E0B" stroke-width="2"/>
+  <!-- Nutritious food toppings -->
+  <circle cx="180" cy="144" r="7" fill="#10B981"/>
+  <circle cx="198" cy="142" r="8" fill="#EF4444"/>
+  <circle cx="218" cy="145" r="6" fill="#F97316"/>
+  <circle cx="170" cy="146" r="5" fill="#3B82F6"/>
+  <!-- Spoon -->
+  <ellipse cx="120" cy="135" rx="12" ry="7" fill="#CBD5E1"/>
+  <line x1="120" y1="135" x2="90" y2="175" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <!-- Glass of milk -->
+  <path d="M280 135 L285 175 L305 175 L310 135 Z" fill="#EEF7FF" stroke="#45B5F5" stroke-width="2"/>
+  <path d="M283 145 L286 173 L304 173 L307 145 Z" fill="#FFFFFF"/>
+  <!-- Happy smiling child eating -->
+  <circle cx="200" cy="75" r="30" fill="#FCD34D"/>
+  <path d="M172 70 C172 45 228 45 228 70 C215 55 185 55 172 70 Z" fill="#172B3A"/>
+  <!-- Joyful Eyes -->
+  <path d="M188 74 C188 71 194 71 194 74" stroke="#172B3A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M206 74 C206 71 212 71 212 74" stroke="#172B3A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Cheerful Smile -->
+  <path d="M194 82 Q200 90 206 82" stroke="#172B3A" stroke-width="2.5" stroke-linecap="round" fill="#EF4444"/>
+  <circle cx="183" cy="80" r="3.5" fill="#F87171" opacity="0.6"/>
+  <circle cx="217" cy="80" r="3.5" fill="#F87171" opacity="0.6"/>
+  <path d="M168 115 C168 100 232 100 232 115 L235 140 L165 140 Z" fill="#10B981"/>
+  <!-- Fresh Apple near table -->
+  <circle cx="70" cy="165" r="12" fill="#EF4444"/>
+  <path d="M70 153 Q74 148 76 150" stroke="#15803D" stroke-width="2.5" fill="none"/>
+  <!-- Badge -->
+  <rect x="20" y="16" width="145" height="26" rx="13" fill="#FFFFFF" stroke="#C5E3FB"/>
+  <text x="32" y="33" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#10B981">🍲 Nutritious Daily Food</text>
+</svg>

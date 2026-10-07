@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#F4FAFF"/>
+  <!-- Decorative background -->
+  <circle cx="80" cy="65" r="40" fill="#EAF6FF"/>
+  <circle cx="340" cy="60" r="32" fill="#FEF3C7"/>
+  <!-- Pair of durable, shiny black & blue school shoes -->
+  <!-- Left Shoe -->
+  <path d="M75 160 C90 145 130 148 145 165 L175 168 C190 168 195 185 180 192 L70 192 C60 192 60 175 75 160 Z" fill="#1E293B" stroke="#0F172A" stroke-width="2"/>
+  <path d="M68 185 L182 185 L180 194 L68 194 Z" fill="#475569"/>
+  <!-- Laces -->
+  <line x1="120" y1="158" x2="135" y2="166" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="122" y1="166" x2="137" y2="174" stroke="#FFFFFF" stroke-width="2"/>
+  <!-- Right Shoe -->
+  <path d="M215 160 C230 145 270 148 285 165 L315 168 C330 168 335 185 320 192 L210 192 C200 192 200 175 215 160 Z" fill="#1E293B" stroke="#0F172A" stroke-width="2"/>
+  <path d="M208 185 L322 185 L320 194 L208 194 Z" fill="#475569"/>
+  <line x1="260" y1="158" x2="275" y2="166" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="262" y1="166" x2="277" y2="174" stroke="#FFFFFF" stroke-width="2"/>
+  <!-- Happy kid walking to school with shoes -->
+  <circle cx="200" cy="70" r="28" fill="#FCD34D"/>
+  <path d="M175 65 C175 42 225 42 225 65 C215 50 185 50 175 65 Z" fill="#172B3A"/>
+  <!-- Eyes & Smile -->
+  <circle cx="192" cy="70" r="2.5" fill="#172B3A"/>
+  <circle cx="208" cy="70" r="2.5" fill="#172B3A"/>
+  <path d="M195 78 Q200 84 205 78" stroke="#172B3A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- School uniform top -->
+  <path d="M170 100 C170 90 230 90 230 100 L235 135 L165 135 Z" fill="#1688E8"/>
+  <line x1="190" y1="100" x2="200" y2="115" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="210" y1="100" x2="200" y2="115" stroke="#FFFFFF" stroke-width="2"/>
+  <!-- Sparkles on Shoes -->
+  <polygon points="185,148 187,153 192,153 188,156 190,161 185,158 180,161 182,156 178,153 183,153" fill="#F59E0B"/>
+  <polygon points="325,148 327,153 332,153 328,156 330,161 325,158 320,161 322,156 318,153 323,153" fill="#F59E0B"/>
+  <!-- Badge -->
+  <rect x="20" y="16" width="165" height="26" rx="13" fill="#FFFFFF" stroke="#C5E3FB"/>
+  <text x="32" y="33" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#1E293B">👟 Sturdy School Shoes</text>
+</svg>

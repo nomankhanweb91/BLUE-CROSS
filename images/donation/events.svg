@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#F4FAFF"/>
+  <!-- Sun & Festive Flags -->
+  <circle cx="340" cy="50" r="26" fill="#FEF3C7"/>
+  <path d="M40 50 Q120 70 200 50 T360 50" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+  <polygon points="60,53 80,55 70,80" fill="#EF4444"/>
+  <polygon points="100,57 120,59 110,84" fill="#3B82F6"/>
+  <polygon points="140,58 160,57 150,82" fill="#10B981"/>
+  <polygon points="180,54 200,50 190,75" fill="#F59E0B"/>
+  <polygon points="220,51 240,53 230,78" fill="#8B5CF6"/>
+  <polygon points="260,54 280,56 270,81" fill="#EC4899"/>
+  <!-- Balloons -->
+  <ellipse cx="90" cy="110" rx="16" ry="20" fill="#EF4444"/>
+  <path d="M90 130 Q92 150 90 170" stroke="#94A3B8" stroke-width="1.5" fill="none"/>
+  <ellipse cx="310" cy="110" rx="16" ry="20" fill="#3B82F6"/>
+  <path d="M310 130 Q308 150 310 170" stroke="#94A3B8" stroke-width="1.5" fill="none"/>
+  <!-- Happy Children Celebrating -->
+  <circle cx="160" cy="110" r="18" fill="#FCD34D"/>
+  <path d="M145 140 C145 125 175 125 175 140 L175 180 L145 180 Z" fill="#10B981"/>
+  <!-- Child 2 Center Cheering with raised hands -->
+  <circle cx="200" cy="100" r="20" fill="#FCD34D"/>
+  <path d="M182 135 C182 118 218 118 218 135 L218 180 L182 180 Z" fill="#1688E8"/>
+  <path d="M182 135 L170 110" stroke="#1688E8" stroke-width="6" stroke-linecap="round"/>
+  <path d="M218 135 L230 110" stroke="#1688E8" stroke-width="6" stroke-linecap="round"/>
+  <!-- Child 3 -->
+  <circle cx="240" cy="110" r="18" fill="#FCD34D"/>
+  <path d="M225 140 C225 125 255 125 255 140 L255 180 L225 180 Z" fill="#F59E0B"/>
+  <!-- Stage Base -->
+  <rect x="50" y="180" width="300" height="15" rx="6" fill="#E1EDF5"/>
+  <!-- Badge -->
+  <rect x="20" y="16" width="160" height="26" rx="13" fill="#FFFFFF" stroke="#C5E3FB"/>
+  <text x="32" y="33" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#1688E8">🎉 Annual Celebration</text>
+</svg>

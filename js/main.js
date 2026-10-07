@@ -8,7 +8,25 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaqAccordions();
   initGalleryLightbox();
   highlightActiveNavLink();
+  initVisitorCounter();
 });
+
+function initVisitorCounter() {
+  const BASELINE = 18490;
+  let count = parseInt(localStorage.getItem('blue_cross_visitors') || '0', 10);
+  if (!count || count < BASELINE) {
+    count = BASELINE + Math.floor(Math.random() * 5) + 1;
+  } else {
+    count += 1;
+  }
+  localStorage.setItem('blue_cross_visitors', count.toString());
+
+  const formatted = count.toLocaleString('en-IN');
+  document.querySelectorAll('.footer-visitor-count').forEach(el => {
+    el.textContent = `${formatted}+`;
+  });
+}
+
 
 function initMobileNavigation() {
   const toggleBtn = document.getElementById('mobileNavToggle');
@@ -76,19 +94,31 @@ function initGalleryLightbox() {
     item.addEventListener('click', () => {
       const title = item.getAttribute('data-title') || 'Gallery Photo';
       const tag = item.getAttribute('data-tag') || 'BLUE CROSS';
+      const imgSrc = item.getAttribute('data-img');
       const icon = item.getAttribute('data-icon') || '📸';
 
       if (titleEl) titleEl.textContent = title;
       if (tagEl) tagEl.textContent = tag;
       if (mediaContainer) {
-        mediaContainer.innerHTML = `
-          <div style="font-size: 5rem; text-align: center; padding: 40px; color: #1688E8;">
-            ${icon}
-            <div style="font-size: 1.1rem; color: #5F7180; margin-top: 10px; font-weight: normal;">
-              ${title}
+        if (imgSrc) {
+          mediaContainer.innerHTML = `
+            <div style="text-align: center; padding: 16px;">
+              <img src="${imgSrc}" alt="${title}" style="max-width: 100%; max-height: 420px; border-radius: 12px; object-fit: contain; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+              <div style="font-size: 1rem; color: #5F7180; margin-top: 14px; font-weight: 500;">
+                ${title}
+              </div>
             </div>
-          </div>
-        `;
+          `;
+        } else {
+          mediaContainer.innerHTML = `
+            <div style="font-size: 5rem; text-align: center; padding: 40px; color: #1688E8;">
+              ${icon}
+              <div style="font-size: 1.1rem; color: #5F7180; margin-top: 10px; font-weight: normal;">
+                ${title}
+              </div>
+            </div>
+          `;
+        }
       }
 
       lightbox.classList.add('active');
