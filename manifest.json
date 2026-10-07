@@ -1,0 +1,21 @@
+{
+  "name": "BLUE CROSS - Free Learning & Community Support",
+  "short_name": "BLUE CROSS",
+  "description": "Every child deserves a chance to learn. Free online learning resources, interactive lessons, educational games, and community support.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1688E8",
+  "icons": [
+    {
+      "src": "./images/logo/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "./images/logo/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

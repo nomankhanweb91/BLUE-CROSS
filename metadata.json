@@ -1,0 +1,6 @@
+{
+  "name": "BLUE CROSS - Free Learning & Community Support",
+  "description": "Every child deserves a chance to learn. Free online learning resources, interactive lessons, educational games, and community support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
