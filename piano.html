@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🎹 Magic Piano &amp; Music Lab — BLUE CROSS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, sans-serif;
+      color: #172B3A;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #F4FAFF;
+      overflow-x: hidden;
+      user-select: none;
+    }
+    .piano-nav-header {
+      width: 100%;
+      background: #FFFFFF;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #E1EDF5;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      box-sizing: border-box;
+      z-index: 30;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 16px 0 6px;
+      color: #1688E8;
+      text-align: center;
+    }
+    .controls-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      z-index: 20;
+    }
+    .voice-selector {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .voice-btn, .upload-btn {
+      padding: 8px 16px;
+      border: 1px solid #E1EDF5;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #FFFFFF;
+      color: #172B3A;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+    }
+    .voice-btn:hover { background: #EEF7FF; }
+    .voice-btn.active {
+      background: #1688E8;
+      color: #FFFFFF;
+      border-color: #1688E8;
+      box-shadow: 0 4px 12px rgba(22,136,232,0.3);
+      transform: scale(1.05);
+    }
+    .upload-btn {
+      background: #FEF3C7;
+      color: #D97706;
+      border-color: #FDE68A;
+    }
+
+    .piano-container {
+      display: flex;
+      gap: 8px;
+      padding: 18px;
+      background: #FFFFFF;
+      border-radius: 24px;
+      box-shadow: 0 16px 40px rgba(22,136,232,0.15);
+      border: 3px solid #E1EDF5;
+      z-index: 20;
+      max-width: 95vw;
+      overflow-x: auto;
+    }
+    .key {
+      position: relative;
+      width: clamp(38px, 6vw, 55px);
+      height: 240px;
+      border-radius: 0 0 12px 12px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 16px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #FFFFFF;
+      box-shadow: 0 6px 0 rgba(0,0,0,0.15);
+      transition: transform 0.1s;
+      touch-action: manipulation;
+    }
+    .key:active, .key.playing {
+      transform: translateY(6px);
+      filter: brightness(1.15);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+    }
+    .key:nth-child(1) { background: #EF4444; height: 260px; }
+    .key:nth-child(2) { background: #F97316; height: 255px; }
+    .key:nth-child(3) { background: #F59E0B; height: 250px; }
+    .key:nth-child(4) { background: #10B981; height: 245px; }
+    .key:nth-child(5) { background: #06B6D4; height: 240px; }
+    .key:nth-child(6) { background: #1688E8; height: 235px; }
+    .key:nth-child(7) { background: #8B5CF6; height: 230px; }
+    .key:nth-child(8) { background: #EC4899; height: 225px; }
+
+    .key span { font-size: 11px; opacity: 0.85; margin-top: 4px; }
+
+    .note-particle {
+      position: absolute;
+      font-size: 26px;
+      pointer-events: none;
+      animation: floatUp 1.4s ease-out forwards;
+      z-index: 100;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.6); opacity: 0; }
+      20% { opacity: 1; transform: scale(1.2); }
+      100% { transform: translateY(-100px) rotate(20deg); opacity: 0; }
+    }
+
+    .song-tunes-bar {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      z-index: 20;
+    }
+    .song-btn {
+      padding: 6px 14px;
+      border-radius: 16px;
+      border: 1px solid #C5E3FB;
+      background: #EEF7FF;
+      color: #1688E8;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .song-btn:hover { background: #E0F2FE; }
+
+    .footer-scene {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 5;
+    }
+    .scene-layer-forest {
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      width: 200%;
+      font-size: 40px;
+      line-height: 1;
+      opacity: 0.8;
+      animation: forestMove 50s linear infinite;
+      white-space: nowrap;
+    }
+    .scene-layer-road {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 35px;
+      background: linear-gradient(to bottom, #64748B, #334155);
+      border-top: 3px solid #475569;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .road-divider {
+      width: 100%;
+      height: 2px;
+      background: repeating-linear-gradient(to right, #FFFFFF, #FFFFFF 30px, transparent 30px, transparent 60px);
+      opacity: 0.7;
+    }
+    .walker {
+      position: absolute;
+      bottom: 8px;
+      font-size: 28px;
+      line-height: 1;
+      z-index: 10;
+    }
+    @keyframes forestMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes walkRight { 0% { transform: translateX(-100px) scaleX(1); } 100% { transform: translateX(100vw) scaleX(1); } }
+    @keyframes bounce { 0%, 100% { bottom: 8px; } 50% { bottom: 14px; } }
+    .kid1 { animation: walkRight 18s linear infinite, bounce 0.6s ease-in-out infinite; }
+    .dog { font-size: 24px; animation: walkRight 11s linear infinite, bounce 0.3s ease-in-out infinite; animation-delay: 2s; }
+  </style>
+</head>
+<body>
+
+  <header class="piano-nav-header">
+    <a href="learning.html" class="btn btn-outline btn-sm">← Back to Learning</a>
+    <div style="font-weight: 800; color: #1688E8; font-size: 1.15rem;">🎹 Magic Piano &amp; Music Lab</div>
+    <a href="games.html" class="btn btn-primary btn-sm">Games Arcade</a>
+  </header>
+
+  <h1>🎵 Magic Piano &amp; Instruments 🎶</h1>
+  <p style="color: #5F7180; margin: 0 0 16px; font-size: 0.95rem;">Tap piano keys or press A, S, D, F, G, H, J, K on your keyboard!</p>
+
+  <div class="controls-area">
+    <div class="voice-selector">
+      <button class="voice-btn active" onclick="setInstrument('piano', this)">🎹 Piano</button>
+      <button class="voice-btn" onclick="setInstrument('xylophone', this)">🔔 Xylophone</button>
+      <button class="voice-btn" onclick="setInstrument('synth', this)">🎸 Guitar</button>
+      <button class="voice-btn" onclick="setInstrument('gameboy', this)">👾 Gameboy</button>
+      <button class="voice-btn" onclick="setInstrument('flute', this)">🎼 Flute</button>
+    </div>
+
+    <div style="display: flex; gap: 8px;">
+      <button class="upload-btn" onclick="document.getElementById('fileInput').click()">📂 Play Your MP3</button>
+      <input type="file" id="fileInput" accept="audio/*" style="display: none;" onchange="handleFileUpload(this)">
+      <audio id="audioPlayer" controls style="display: none; height: 35px;"></audio>
+    </div>
+  </div>
+
+  <div class="piano-container">
+    <button class="key" data-note="C4" data-key="a">Do<span>(A)</span></button>
+    <button class="key" data-note="D4" data-key="s">Re<span>(S)</span></button>
+    <button class="key" data-note="E4" data-key="d">Mi<span>(D)</span></button>
+    <button class="key" data-note="F4" data-key="f">Fa<span>(F)</span></button>
+    <button class="key" data-note="G4" data-key="g">So<span>(G)</span></button>
+    <button class="key" data-note="A4" data-key="h">La<span>(H)</span></button>
+    <button class="key" data-note="B4" data-key="j">Ti<span>(J)</span></button>
+    <button class="key" data-note="C5" data-key="k">Do<span>(K)</span></button>
+  </div>
+
+  <div class="song-tunes-bar">
+    <span style="font-weight: 700; color: #5F7180; font-size: 13px; align-self: center;">Quick Nursery Tunes:</span>
+    <button class="song-btn" onclick="playMelody(['C4','C4','G4','G4','A4','A4','G4'])">⭐ Twinkle Twinkle</button>
+    <button class="song-btn" onclick="playMelody(['E4','D4','C4','D4','E4','E4','E4'])">🐑 Mary Had A Lamb</button>
+    <button class="song-btn" onclick="playMelody(['C4','D4','E4','F4','G4','A4','B4','C5'])">🎶 Scale Up (Do-Re-Mi)</button>
+  </div>
+
+  <div class="footer-scene">
+    <div class="scene-layer-forest">🌲🌳🌲🌳🌴🌲🌳🌲⛰️🌳🌲🌳</div>
+    <div class="scene-layer-road"><div class="road-divider"></div></div>
+    <div class="walker kid1">👧</div>
+    <div class="walker dog">🐕</div>
+  </div>
+
+  <script>
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    let currentInstrument = 'piano';
+    const instrumentSettings = {
+      piano: { type: 'triangle', attack: 0.05, decay: 1.4, vol: 0.6 },
+      xylophone: { type: 'sine', attack: 0.01, decay: 0.45, vol: 0.8 },
+      synth: { type: 'sawtooth', attack: 0.01, decay: 0.7, vol: 0.25 },
+      gameboy: { type: 'square', attack: 0.01, decay: 0.3, vol: 0.2 },
+      flute: { type: 'sine', attack: 0.2, decay: 1.0, vol: 0.65 }
+    };
+
+    function setInstrument(name, btnElement) {
+      currentInstrument = name;
+      document.querySelectorAll('.voice-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+    }
+
+    const frequencies = {
+      "C4": 261.63, "D4": 293.66, "E4": 329.63, "F4": 349.23,
+      "G4": 392.00, "A4": 440.00, "B4": 493.88, "C5": 523.25
+    };
+
+    function playTone(note) {
+      const ctx = getAudioContext();
+      const inst = instrumentSettings[currentInstrument];
+      const osc = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+
+      osc.type = inst.type;
+      osc.frequency.setValueAtTime(frequencies[note] || 440, ctx.currentTime);
+
+      const now = ctx.currentTime;
+      gainNode.gain.setValueAtTime(0, now);
+      gainNode.gain.linearRampToValueAtTime(inst.vol, now + inst.attack);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now + inst.attack + inst.decay);
+
+      osc.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      osc.start();
+      osc.stop(now + inst.attack + inst.decay + 0.1);
+    }
+
+    function spawnNote(element) {
+      const symbols = ['🎵', '🎶', '🎼', '✨', '⭐', '🎹'];
+      const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+      const noteEl = document.createElement('div');
+      noteEl.className = 'note-particle';
+      noteEl.textContent = symbol;
+      const rect = element.getBoundingClientRect();
+      noteEl.style.left = (rect.left + rect.width / 2 - 12) + 'px';
+      noteEl.style.top = (rect.top - 15) + 'px';
+      document.body.appendChild(noteEl);
+      setTimeout(() => noteEl.remove(), 1400);
+    }
+
+    function activateKey(keyElement) {
+      if (!keyElement) return;
+      playTone(keyElement.getAttribute('data-note'));
+      keyElement.classList.add('playing');
+      setTimeout(() => keyElement.classList.remove('playing'), 120);
+      spawnNote(keyElement);
+    }
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => {
+      key.addEventListener('mousedown', () => activateKey(key));
+      key.addEventListener('touchstart', (e) => { e.preventDefault(); activateKey(key); });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.repeat) return;
+      const keyElement = document.querySelector(`.key[data-key="${e.key.toLowerCase()}"]`);
+      if (keyElement) activateKey(keyElement);
+    });
+
+    function playMelody(notes) {
+      notes.forEach((note, index) => {
+        setTimeout(() => {
+          const keyEl = document.querySelector(`.key[data-note="${note}"]`);
+          if (keyEl) activateKey(keyEl);
+        }, index * 420);
+      });
+    }
+
+    function handleFileUpload(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const audioPlayer = document.getElementById('audioPlayer');
+      audioPlayer.src = URL.createObjectURL(file);
+      audioPlayer.style.display = 'block';
+      audioPlayer.play();
+    }
+  </script>
+</body>
+</html>

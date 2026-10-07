@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>✨ Learn A–Z Interactive — BLUE CROSS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, sans-serif;
+      color: #172B3A;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #F4FAFF;
+      overflow-x: hidden;
+    }
+    .learn-nav-header {
+      width: 100%;
+      background: #FFFFFF;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #E1EDF5;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      z-index: 20;
+    }
+    h1 {
+      font-size: 30px;
+      margin: 16px 0 10px;
+      color: #1688E8;
+      text-align: center;
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      z-index: 10;
+    }
+    .controls button {
+      background: #FFFFFF;
+      color: #172B3A;
+      border: 1px solid #C5E3FB;
+      border-radius: 20px;
+      padding: 8px 18px;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .controls button:hover {
+      background: #EEF7FF;
+      color: #1688E8;
+    }
+    .progress {
+      margin: 4px 0 16px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #1688E8;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(68px, 1fr));
+      gap: 12px;
+      max-width: 880px;
+      width: 92%;
+      margin-bottom: 30px;
+      z-index: 10;
+    }
+    .btn-letter {
+      position: relative;
+      border: 1px solid #E1EDF5;
+      border-radius: 16px;
+      padding: 16px;
+      font-size: 24px;
+      font-weight: 800;
+      background: #FFFFFF;
+      color: #1688E8;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(22,136,232,0.1);
+      transition: all 0.15s ease;
+    }
+    .btn-letter:hover {
+      transform: translateY(-3px) scale(1.06);
+      border-color: #1688E8;
+      box-shadow: 0 8px 20px rgba(22,136,232,0.2);
+    }
+    .btn-letter:active { transform: scale(0.96); }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(23, 43, 58, 0.4);
+      backdrop-filter: blur(4px);
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      z-index: 100;
+    }
+    .modal.show { visibility: visible; opacity: 1; }
+    .modal-content {
+      width: min(440px, 90vw);
+      background: #FFFFFF;
+      color: #172B3A;
+      border-radius: 24px;
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+      border: 2px solid #E1EDF5;
+    }
+    .modal-letter {
+      font-size: 78px;
+      font-weight: 900;
+      color: #1688E8;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .modal-word {
+      font-size: 24px;
+      margin-top: 8px;
+      font-weight: 700;
+      color: #172B3A;
+    }
+    .modal-emoji {
+      font-size: 48px;
+      margin-top: 10px;
+      display: inline-block;
+    }
+    .close-btn {
+      margin-top: 20px;
+      background: #1688E8;
+      color: #FFFFFF;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(22,136,232,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="learn-nav-header">
+    <a href="learning.html" class="btn btn-outline btn-sm">← Back to Learning</a>
+    <div style="font-weight: 800; color: #1688E8; font-size: 1.15rem;">✨ Learn A–Z Interactive</div>
+    <a href="english.html" class="btn btn-primary btn-sm">Phonics Player</a>
+  </header>
+
+  <h1>✨ Learn Letters A–Z ✨</h1>
+
+  <div class="controls">
+    <button onclick="toggleVoice()" id="voiceBtn">🔊 Voice: ON</button>
+    <button onclick="toggleLanguage()" id="langBtn">🌐 Mode: Bilingual (Hindi + English)</button>
+  </div>
+
+  <div class="progress" id="progress">⭐ Explored: 0/26</div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-letter" id="modalLetter">A</div>
+      <div class="modal-word" id="modalWord">A For Apple, Apple Means, सेब</div>
+      <div class="modal-emoji" id="modalEmoji">🍎</div>
+      <div>
+        <button class="close-btn" onclick="closeModal()">Close ➔</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    const wordsHI = {
+      A: { word: "अनार", phrase: "A For Apple, Apple Means, सेब", emoji: "🍎" },
+      B: { word: "बल्ला", phrase: "B for bat, Bat Means, बल्ला", emoji: "🏏" },
+      C: { word: "बिल्ली", phrase: "C for cat, Cat means, बिल्ली", emoji: "🐱" },
+      D: { word: "कुत्ता", phrase: "D for dog, dog means, कुत्ता", emoji: "🐶" },
+      E: { word: "हाथी", phrase: "E for elephant, elephant means, हाथी", emoji: "🐘" },
+      F: { word: "मछली", phrase: "F for Fish, Fish Means, मछली", emoji: "🐟" },
+      G: { word: "बकरी", phrase: "G for Goat , Goat Means, बकरी", emoji: "🐐" },
+      H: { word: "टोपी", phrase: "H for Hat, Hat Means, टोपी", emoji: "🎩" },
+      I: { word: "बर्फ", phrase: "I for Ice, Ice Means, बर्फ", emoji: "🧊" },
+      J: { word: "जग", phrase: "J for Jug, Jug Means, जग", emoji: "🥤" },
+      K: { word: "पतंग", phrase: "K for Kite, Kite Means, पतंग", emoji: "🪁" },
+      L: { word: "शेर", phrase: "L for Lion, Lion Means, शेर", emoji: "🦁" },
+      M: { word: "बंदर", phrase: "M for Monkey, Monkey Means, बंदर", emoji: "🐒" },
+      N: { word: "घोंसला", phrase: "N for Nest, Nest Means, घोंसला", emoji: "🪹" },
+      O: { word: "संतरा", phrase: "O for Orange, Orange means, संतरा", emoji: "🍊" },
+      P: { word: "तोता", phrase: "P for Parrot, Parrot Means, तोता", emoji: "🦜" },
+      Q: { word: "रानी", phrase: "Q for Queen, Queen Means, रानी", emoji: "👑" },
+      R: { word: "खरगोश", phrase: "R for Rabbit, Rabbit Means, खरगोश", emoji: "🐇" },
+      S: { word: "सूरज", phrase: "S for Sun, Sun Means, सूरज", emoji: "☀️" },
+      T: { word: "बाघ", phrase: "T for Tiger, Tiger Means, बाघ", emoji: "🐯" },
+      U: { word: "छाता", phrase: "U for Umbrella, Umbrella Means, छाता", emoji: "☂️" },
+      V: { word: "वायलिन", phrase: "V for Violin, Violin Means, वायलिन", emoji: "🎻" },
+      W: { word: "घड़ी", phrase: "W for Watch, Watch Means, घड़ी", emoji: "⌚" },
+      X: { word: "ज़ाइलोफ़ोन", phrase: "X for Xilophone, Xilophone means, ज़ाइलोफ़ोन", emoji: "🎶" },
+      Y: { word: "याक", phrase: "Y for Yatch, Yatch means, याक", emoji: "🐃" },
+      Z: { word: "ज़ेब्रा", phrase: "Z for Zebra, Zebra Means, ज़ेब्रा", emoji: "🦓" }
+    };
+
+    const wordsEN = {
+      A: { word: "Apple", phrase: "A for Apple", emoji: "🍎" },
+      B: { word: "Ball", phrase: "B for Ball", emoji: "🏀" },
+      C: { word: "Cat", phrase: "C for Cat", emoji: "🐱" },
+      D: { word: "Dog", phrase: "D for Dog", emoji: "🐶" },
+      E: { word: "Elephant", phrase: "E for Elephant", emoji: "🐘" },
+      F: { word: "Fish", phrase: "F for Fish", emoji: "🐟" },
+      G: { word: "Goat", phrase: "G for Goat", emoji: "🐐" },
+      H: { word: "Hat", phrase: "H for Hat", emoji: "🎩" },
+      I: { word: "Ice", phrase: "I for Ice", emoji: "🧊" },
+      J: { word: "Jug", phrase: "J for Jug", emoji: "🥤" },
+      K: { word: "Kite", phrase: "K for Kite", emoji: "🪁" },
+      L: { word: "Lion", phrase: "L for Lion", emoji: "🦁" },
+      M: { word: "Monkey", phrase: "M for Monkey", emoji: "🐒" },
+      N: { word: "Nest", phrase: "N for Nest", emoji: "🪹" },
+      O: { word: "Orange", phrase: "O for Orange", emoji: "🍊" },
+      P: { word: "Parrot", phrase: "P for Parrot", emoji: "🦜" },
+      Q: { word: "Queen", phrase: "Q for Queen", emoji: "👑" },
+      R: { word: "Rabbit", phrase: "R for Rabbit", emoji: "🐇" },
+      S: { word: "Sun", phrase: "S for Sun", emoji: "☀️" },
+      T: { word: "Tiger", phrase: "T for Tiger", emoji: "🐯" },
+      U: { word: "Umbrella", phrase: "U for Umbrella", emoji: "☂️" },
+      V: { word: "Violin", phrase: "V for Violin", emoji: "🎻" },
+      W: { word: "Watch", phrase: "W for Watch", emoji: "⌚" },
+      X: { word: "Xylophone", phrase: "X for Xylophone", emoji: "🎶" },
+      Y: { word: "Yak", phrase: "Y for Yak", emoji: "🐃" },
+      Z: { word: "Zebra", phrase: "Z for Zebra", emoji: "🦓" }
+    };
+
+    let useHindi = true;
+    let voiceOn = true;
+    const learned = new Set();
+
+    const grid = document.getElementById('grid');
+    const modal = document.getElementById('modal');
+    const modalLetter = document.getElementById('modalLetter');
+    const modalWord = document.getElementById('modalWord');
+    const modalEmoji = document.getElementById('modalEmoji');
+    const voiceBtn = document.getElementById('voiceBtn');
+    const langBtn = document.getElementById('langBtn');
+    const progressEl = document.getElementById('progress');
+
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    letters.forEach(letter => {
+      const btn = document.createElement('button');
+      btn.className = 'btn-letter';
+      btn.textContent = letter;
+      btn.addEventListener('click', () => {
+        const set = useHindi ? wordsHI : wordsEN;
+        const data = set[letter];
+        showModal(letter, data);
+
+        if (!learned.has(letter)) {
+          learned.add(letter);
+          progressEl.textContent = `⭐ Explored: ${learned.size}/26`;
+        }
+
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 30, spread: 60, origin: { y: 0.7 } });
+        }
+      });
+      grid.appendChild(btn);
+    });
+
+    function showModal(letter, data) {
+      modalLetter.textContent = letter;
+      modalWord.textContent = data.phrase;
+      modalEmoji.textContent = data.emoji;
+      modal.classList.add('show');
+
+      if (voiceOn && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance(data.phrase);
+        msg.lang = useHindi ? 'hi-IN' : 'en-US';
+        msg.rate = 0.95;
+        window.speechSynthesis.speak(msg);
+      }
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    function toggleVoice() {
+      voiceOn = !voiceOn;
+      voiceBtn.textContent = `🔊 Voice: ${voiceOn ? 'ON' : 'OFF'}`;
+      if (!voiceOn && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+
+    function toggleLanguage() {
+      useHindi = !useHindi;
+      langBtn.textContent = `🌐 Mode: ${useHindi ? 'Bilingual (Hindi + English)' : 'English Only'}`;
+    }
+  </script>
+</body>
+</html>

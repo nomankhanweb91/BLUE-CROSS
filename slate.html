@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>🎨 Magic Drawing Slate — BLUE CROSS Creative Arts</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, sans-serif;
+      color: #172B3A;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #F4FAFF;
+      overflow-x: hidden;
+      touch-action: none;
+    }
+    .slate-header {
+      width: 100%;
+      background: #FFFFFF;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #E1EDF5;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      box-sizing: border-box;
+      z-index: 30;
+    }
+    h1 {
+      font-size: 26px;
+      margin: 12px 0 8px;
+      color: #1688E8;
+      text-align: center;
+    }
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      background: #FFFFFF;
+      padding: 10px 18px;
+      border-radius: 50px;
+      box-shadow: 0 6px 20px rgba(22,136,232,0.12);
+      border: 1px solid #E1EDF5;
+      z-index: 20;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 95%;
+    }
+    .tool-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .color-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 3px solid #FFFFFF;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+    }
+    .color-btn:hover, .color-btn.active {
+      transform: scale(1.2);
+      border-color: #172B3A;
+    }
+    .action-btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #F1F5F9;
+      color: #172B3A;
+      transition: 0.2s;
+      font-size: 13px;
+    }
+    .action-btn:hover { background: #E2E8F0; }
+    .rainbow-btn {
+      background: linear-gradient(45deg, #EF4444, #F59E0B, #10B981, #3B82F6, #8B5CF6);
+      color: white;
+    }
+    .eraser-btn { background: #FFFFFF; border: 1.5px solid #CBD5E1; }
+    .clear-btn { background: #EF4444; color: white; }
+    .save-btn { background: #10B981; color: white; }
+    input[type=range] { width: 75px; accent-color: #1688E8; }
+
+    .canvas-container {
+      position: relative;
+      z-index: 15;
+      box-shadow: 0 12px 35px rgba(22,136,232,0.15);
+      border-radius: 20px;
+      border: 10px solid #1688E8;
+      background: #FFFFFF;
+      cursor: crosshair;
+      margin-bottom: 20px;
+    }
+    canvas {
+      display: block;
+      border-radius: 10px;
+      touch-action: none;
+    }
+
+    .footer-scene {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 5;
+    }
+    .scene-layer-forest {
+      position: absolute;
+      bottom: 35px;
+      left: 0;
+      width: 200%;
+      font-size: 45px;
+      line-height: 1;
+      opacity: 0.85;
+      animation: forestMove 50s linear infinite;
+      white-space: nowrap;
+    }
+    .scene-layer-road {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+      background: linear-gradient(to bottom, #64748B, #334155);
+      border-top: 4px solid #475569;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .road-divider {
+      width: 100%;
+      height: 3px;
+      background: repeating-linear-gradient(to right, #FFFFFF, #FFFFFF 30px, transparent 30px, transparent 60px);
+      opacity: 0.7;
+    }
+    .walker {
+      position: absolute;
+      bottom: 10px;
+      font-size: 32px;
+      line-height: 1;
+      z-index: 10;
+      filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.3));
+    }
+    @keyframes forestMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes walkRight { 0% { transform: translateX(-100px) scaleX(1); } 100% { transform: translateX(100vw) scaleX(1); } }
+    @keyframes bounce { 0%, 100% { bottom: 10px; } 50% { bottom: 16px; } }
+    .kid1 { animation: walkRight 16s linear infinite, bounce 0.6s ease-in-out infinite; }
+    .dog { font-size: 26px; animation: walkRight 10s linear infinite, bounce 0.3s ease-in-out infinite; animation-delay: 2s; }
+  </style>
+</head>
+<body>
+
+  <header class="slate-header">
+    <a href="learning.html" class="btn btn-outline btn-sm">← Back to Learning</a>
+    <div style="font-weight: 800; color: #1688E8; font-size: 1.1rem;">🎨 Magic Drawing Slate</div>
+    <a href="arts.html" class="btn btn-primary btn-sm">Art Canvas</a>
+  </header>
+
+  <h1>✨ Draw, Color &amp; Create ✨</h1>
+
+  <div class="toolbar">
+    <div class="tool-group">
+      <div class="color-btn active" style="background: #172B3A;" onclick="setColor('#172B3A', this)"></div>
+      <div class="color-btn" style="background: #EF4444;" onclick="setColor('#EF4444', this)"></div>
+      <div class="color-btn" style="background: #1688E8;" onclick="setColor('#1688E8', this)"></div>
+      <div class="color-btn" style="background: #10B981;" onclick="setColor('#10B981', this)"></div>
+      <div class="color-btn" style="background: #F59E0B;" onclick="setColor('#F59E0B', this)"></div>
+      <div class="color-btn" style="background: #8B5CF6;" onclick="setColor('#8B5CF6', this)"></div>
+    </div>
+
+    <div class="tool-group">
+      <button class="action-btn rainbow-btn" onclick="setRainbow()">🌈 Rainbow</button>
+      <button class="action-btn eraser-btn" onclick="setEraser()">🧽 Erase</button>
+    </div>
+
+    <div class="tool-group">
+      <span style="font-size:12px; font-weight:bold; color: #5F7180;">Size:</span>
+      <input type="range" min="2" max="30" value="5" id="sizeSlider">
+    </div>
+
+    <div class="tool-group">
+      <button class="action-btn clear-btn" onclick="clearCanvas()">❌ Clear</button>
+      <button class="action-btn save-btn" onclick="saveArt()">💾 Save Art</button>
+    </div>
+  </div>
+
+  <div class="canvas-container">
+    <canvas id="slate"></canvas>
+  </div>
+
+  <div class="footer-scene">
+    <div class="scene-layer-forest">🌲🌳🌲🌳🌴🌲🌳🌲⛰️🌳🌲🌳</div>
+    <div class="scene-layer-road"><div class="road-divider"></div></div>
+    <div class="walker kid1">🏃</div>
+    <div class="walker dog">🐕</div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('slate');
+    const ctx = canvas.getContext('2d');
+    const sizeSlider = document.getElementById('sizeSlider');
+
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let brushColor = '#172B3A';
+    let isRainbow = false;
+    let hue = 0;
+
+    function resizeCanvas() {
+      const width = Math.min(window.innerWidth * 0.92, 780);
+      const height = Math.min(window.innerHeight * 0.52, 420);
+
+      canvas.width = width;
+      canvas.height = height;
+
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.lineWidth = sizeSlider.value;
+      ctx.strokeStyle = brushColor;
+
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function startPosition(e) {
+      isDrawing = true;
+      setPosition(e);
+    }
+
+    function endPosition() {
+      isDrawing = false;
+      ctx.beginPath();
+    }
+
+    function setPosition(e) {
+      if (e.type.includes('touch')) {
+        const rect = canvas.getBoundingClientRect();
+        lastX = e.touches[0].clientX - rect.left;
+        lastY = e.touches[0].clientY - rect.top;
+      } else {
+        lastX = e.offsetX;
+        lastY = e.offsetY;
+      }
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+
+      ctx.beginPath();
+      ctx.lineWidth = sizeSlider.value;
+
+      if (isRainbow) {
+        ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+        hue = (hue + 2) % 360;
+      } else {
+        ctx.strokeStyle = brushColor;
+      }
+
+      ctx.moveTo(lastX, lastY);
+      setPosition(e);
+      ctx.lineTo(lastX, lastY);
+      ctx.stroke();
+    }
+
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', endPosition);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseleave', endPosition);
+
+    canvas.addEventListener('touchstart', startPosition, { passive: false });
+    canvas.addEventListener('touchend', endPosition);
+    canvas.addEventListener('touchmove', draw, { passive: false });
+
+    function setColor(color, btn) {
+      isRainbow = false;
+      brushColor = color;
+      document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.rainbow-btn').forEach(b => b.style.outline = 'none');
+      document.querySelectorAll('.eraser-btn').forEach(b => b.style.background = '#FFFFFF');
+      if (btn) btn.classList.add('active');
+    }
+
+    function setRainbow() {
+      isRainbow = true;
+      document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.rainbow-btn').style.outline = '3px solid #1688E8';
+      document.querySelector('.eraser-btn').style.background = '#FFFFFF';
+    }
+
+    function setEraser() {
+      isRainbow = false;
+      brushColor = '#ffffff';
+      document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.rainbow-btn').style.outline = 'none';
+      document.querySelector('.eraser-btn').style.background = '#CBD5E1';
+    }
+
+    function clearCanvas() {
+      canvas.style.transition = 'transform 0.25s';
+      canvas.style.transform = 'scale(0.96) rotate(1deg)';
+      setTimeout(() => {
+        ctx.fillStyle = "#ffffff";
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        canvas.style.transform = 'scale(1) rotate(0deg)';
+      }, 250);
+    }
+
+    function saveArt() {
+      const link = document.createElement('a');
+      link.download = 'blue-cross-magic-slate.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+  </script>
+</body>
+</html>

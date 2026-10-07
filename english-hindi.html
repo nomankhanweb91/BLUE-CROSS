@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>🇬🇧 English to Hindi Phonics — BLUE CROSS</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, sans-serif;
+      color: #172B3A;
+      min-height: 100vh;
+      background: #F4FAFF;
+      display: flex;
+      flex-direction: column;
+    }
+    .class-nav-header {
+      width: 100%;
+      background: #FFFFFF;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #E1EDF5;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      z-index: 20;
+    }
+    .classroom-layout {
+      flex: 1;
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px;
+      gap: 20px;
+    }
+    .left-panel {
+      width: 44%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+    .right-panel {
+      width: 56%;
+      max-height: 75vh;
+      overflow-y: auto;
+      padding: 15px;
+      background: #FFFFFF;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(22,136,232,0.08);
+      border: 1px solid #E1EDF5;
+    }
+    .display-board {
+      background: #FFFFFF;
+      width: 100%;
+      max-width: 440px;
+      height: 380px;
+      border-radius: 24px;
+      box-shadow: 0 15px 40px rgba(22,136,232,0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 8px solid #1688E8;
+      position: relative;
+      text-align: center;
+      padding: 15px;
+    }
+    .display-letter {
+      font-size: 96px;
+      font-weight: 900;
+      color: #1688E8;
+      line-height: 1;
+    }
+    .pop-in {
+      animation: popInEffect 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popInEffect {
+      0% { opacity: 0; transform: scale(0.4); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .display-word {
+      font-size: 24px;
+      color: #172B3A;
+      margin-top: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .display-emoji {
+      font-size: 68px;
+      margin-top: 10px;
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .controls {
+      display: flex;
+      gap: 15px;
+      margin-top: 18px;
+    }
+    .btn-control {
+      padding: 10px 26px;
+      font-size: 17px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .btn-control:hover { transform: scale(1.05); }
+    .btn-play { background: #10B981; color: white; }
+    .btn-stop { background: #64748B; color: white; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      gap: 10px;
+      width: 100%;
+    }
+    .letter-btn {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #172B3A;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      transition: all 0.15s;
+    }
+    .letter-btn:hover {
+      transform: translateY(-2px);
+      border-color: #1688E8;
+      color: #1688E8;
+    }
+    .letter-btn.active {
+      background: #EEF7FF;
+      color: #1688E8;
+      transform: scale(1.1);
+      border: 2px solid #1688E8;
+      box-shadow: 0 0 15px rgba(22,136,232,0.3);
+    }
+    @media (max-width: 768px) {
+      .classroom-layout { flex-direction: column; }
+      .left-panel { width: 100%; }
+      .right-panel { width: 100%; max-height: none; }
+      .display-board { height: 280px; }
+      .display-letter { font-size: 76px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="class-nav-header">
+    <a href="learning.html" class="btn btn-outline btn-sm">← Back to Learning</a>
+    <div style="font-weight: 800; color: #1688E8; font-size: 1.15rem;">🇬🇧 English to Hindi Phonics</div>
+    <a href="english.html" class="btn btn-primary btn-sm">English A-Z</a>
+  </header>
+
+  <div class="classroom-layout">
+    <div class="left-panel">
+      <div class="display-board" id="displayBoard">
+        <div class="display-letter" id="mainLetter">A</div>
+        <div class="display-word" id="mainWord">A For Apple,<br>Apple Means सेब</div>
+        <div class="display-emoji" id="mainEmoji">🍎</div>
+      </div>
+
+      <div class="controls">
+        <button class="btn-control btn-play" onclick="startAutoPlay()">▶ Play All</button>
+        <button class="btn-control btn-stop" onclick="stopAutoPlay()">⏹ Stop</button>
+      </div>
+      <p style="color: #5F7180; font-size: 0.9rem; margin-top: 10px; text-align: center;">
+        Teacher speaks with Hindi meanings, then child repeats!
+      </p>
+    </div>
+
+    <div class="right-panel">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <script>
+    const classData = [
+      { l: "A", w: "A For Apple, Apple Means, सेब", e: "🍎" },
+      { l: "B", w: "B for Bat, Bat Means, बल्ला", e: "🏏" },
+      { l: "C", w: "C for Cat, Cat Means, बिल्ली", e: "🐱" },
+      { l: "D", w: "D for Dog, Dog Means, कुत्ता", e: "🐶" },
+      { l: "E", w: "E for Elephant, Elephant Means, हाथी", e: "🐘" },
+      { l: "F", w: "F for Fish, Fish Means, मछली", e: "🐟" },
+      { l: "G", w: "G for Goat, Goat Means, बकरी", e: "🐐" },
+      { l: "H", w: "H for Hat, Hat Means, टोपी", e: "🎩" },
+      { l: "I", w: "I for Ice, Ice Means, बर्फ", e: "🧊" },
+      { l: "J", w: "J for Jug, Jug Means, जग", e: "🥤" },
+      { l: "K", w: "K for Kite, Kite Means, पतंग", e: "🪁" },
+      { l: "L", w: "L for Lion, Lion Means, शेर", e: "🦁" },
+      { l: "M", w: "M for Monkey, Monkey Means, बंदर", e: "🐒" },
+      { l: "N", w: "N for Nest, Nest Means, घोंसला", e: "🪹" },
+      { l: "O", w: "O for Orange, Orange Means, संतरा", e: "🍊" },
+      { l: "P", w: "P for Parrot, Parrot Means, तोता", e: "🦜" },
+      { l: "Q", w: "Q for Queen, Queen Means, रानी", e: "👑" },
+      { l: "R", w: "R for Rabbit, Rabbit Means, खरगोश", e: "🐇" },
+      { l: "S", w: "S for Sun, Sun Means, सूरज", e: "☀️" },
+      { l: "T", w: "T for Tiger, Tiger Means, बाघ", e: "🐯" },
+      { l: "U", w: "U for Umbrella, Umbrella Means, छाता", e: "☂️" },
+      { l: "V", w: "V for Violin, Violin Means, वायलिन", e: "🎻" },
+      { l: "W", w: "W for Watch, Watch Means, घड़ी", e: "⌚" },
+      { l: "X", w: "X for Xylophone, Xylophone Means, ज़ाइलोफ़ोन", e: "🎶" },
+      { l: "Y", w: "Y for Yak, Yak Means, याक", e: "🐃" },
+      { l: "Z", w: "Z for Zebra, Zebra Means, ज़ेब्रा", e: "🦓" }
+    ];
+
+    const grid = document.getElementById('grid');
+    const mainLetter = document.getElementById('mainLetter');
+    const mainWord = document.getElementById('mainWord');
+    const mainEmoji = document.getElementById('mainEmoji');
+
+    let isAutoPlaying = false;
+    let currentIndex = 0;
+    let synthesis = window.speechSynthesis;
+    let buttons = [];
+
+    classData.forEach((item, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'letter-btn';
+      btn.textContent = item.l;
+      btn.onclick = () => { stopAutoPlay(); playItem(index); };
+      grid.appendChild(btn);
+      buttons.push(btn);
+    });
+
+    function playItem(index) {
+      if (index >= classData.length) { stopAutoPlay(); return; }
+
+      currentIndex = index;
+      const data = classData[index];
+
+      mainLetter.textContent = data.l;
+      const displayParts = data.w.split(', ');
+      if (displayParts.length > 1) {
+        mainWord.innerHTML = `${displayParts[0]},<br>${displayParts.slice(1).join(', ')}`;
+      } else {
+        mainWord.textContent = data.w;
+      }
+      mainEmoji.textContent = data.e;
+
+      mainLetter.classList.remove('pop-in');
+      void mainLetter.offsetWidth;
+      mainLetter.classList.add('pop-in');
+
+      buttons.forEach(b => b.classList.remove('active'));
+      buttons[index].classList.add('active');
+      buttons[index].scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+      // Teacher Speaks
+      speak(data.w, 1.0, 0.9, () => {
+        if (!isAutoPlaying && index !== currentIndex) return;
+        setTimeout(() => {
+          // Kids Repeat
+          speak(data.w, 1.5, 1.0, () => {
+            if (isAutoPlaying) {
+              setTimeout(() => playItem(index + 1), 750);
+            }
+          });
+        }, 400);
+      });
+    }
+
+    function speak(text, pitch, rate, callback) {
+      synthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'hi-IN';
+      u.pitch = pitch;
+      u.rate = rate;
+      u.onend = function() { if (callback) callback(); };
+      synthesis.speak(u);
+    }
+
+    function startAutoPlay() {
+      if (isAutoPlaying) return;
+      isAutoPlaying = true;
+      currentIndex = 0;
+      playItem(0);
+    }
+
+    function stopAutoPlay() {
+      isAutoPlaying = false;
+      synthesis.cancel();
+      buttons.forEach(b => b.classList.remove('active'));
+    }
+  </script>
+</body>
+</html>

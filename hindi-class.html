@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>🇮🇳 हिंदी कक्षा — BLUE CROSS Interactive Learning</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, sans-serif;
+      color: #172B3A;
+      min-height: 100vh;
+      background: #F4FAFF;
+      display: flex;
+      flex-direction: column;
+    }
+    .class-nav-header {
+      width: 100%;
+      background: #FFFFFF;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #E1EDF5;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      z-index: 20;
+    }
+    .classroom-layout {
+      flex: 1;
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px;
+      gap: 20px;
+    }
+    .left-panel {
+      width: 44%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+    .right-panel {
+      width: 56%;
+      max-height: 75vh;
+      overflow-y: auto;
+      padding: 15px;
+      background: #FFFFFF;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(22,136,232,0.08);
+      border: 1px solid #E1EDF5;
+    }
+    .display-board {
+      background: #FFFFFF;
+      width: 100%;
+      max-width: 440px;
+      height: 380px;
+      border-radius: 24px;
+      box-shadow: 0 15px 40px rgba(22,136,232,0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 8px solid #1688E8;
+      position: relative;
+    }
+    .display-letter { font-size: 110px; font-weight: bold; color: #1688E8; line-height: 1; }
+    .display-word { font-size: 32px; color: #172B3A; margin-top: 10px; font-weight: 700; }
+    .display-emoji { font-size: 70px; margin-top: 8px; animation: bounce 1.5s infinite; }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .controls {
+      display: flex;
+      gap: 15px;
+      margin-top: 18px;
+    }
+    .btn-control {
+      padding: 10px 26px;
+      font-size: 17px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .btn-control:hover { transform: scale(1.05); }
+    .btn-play { background: #10B981; color: white; }
+    .btn-stop { background: #64748B; color: white; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      gap: 10px;
+      width: 100%;
+    }
+    .letter-btn {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #172B3A;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      transition: all 0.15s;
+    }
+    .letter-btn:hover {
+      transform: translateY(-2px);
+      border-color: #1688E8;
+      color: #1688E8;
+    }
+    .letter-btn.active {
+      background: #EEF7FF;
+      color: #1688E8;
+      transform: scale(1.1);
+      border: 2px solid #1688E8;
+      box-shadow: 0 0 15px rgba(22,136,232,0.3);
+    }
+    @media (max-width: 768px) {
+      .classroom-layout { flex-direction: column; }
+      .left-panel { width: 100%; }
+      .right-panel { width: 100%; max-height: none; }
+      .display-board { height: 280px; }
+      .display-letter { font-size: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="class-nav-header">
+    <a href="learning.html" class="btn btn-outline btn-sm">← Back to Learning</a>
+    <div style="font-weight: 800; color: #1688E8; font-size: 1.15rem;">🇮🇳 हिंदी कक्षा (Varnamala Class)</div>
+    <a href="hindi.html" class="btn btn-primary btn-sm">Hindi Module</a>
+  </header>
+
+  <div class="classroom-layout">
+    <div class="left-panel">
+      <div class="display-board" id="displayBoard">
+        <div class="display-letter" id="mainLetter">अ</div>
+        <div class="display-word" id="mainWord">अ से अनार</div>
+        <div class="display-emoji" id="mainEmoji">🍎</div>
+      </div>
+
+      <div class="controls">
+        <button class="btn-control btn-play" onclick="startAutoPlay()">▶ Start Class</button>
+        <button class="btn-control btn-stop" onclick="stopAutoPlay()">⏹ Stop</button>
+      </div>
+      <p style="color: #5F7180; font-size: 0.9rem; margin-top: 10px; text-align: center;">
+        Teacher speaks first, then child repeats!
+      </p>
+    </div>
+
+    <div class="right-panel">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <script>
+    const hindiData = [
+      { l: "अ", w: "अ से अनार", e: "🍎" }, { l: "आ", w: "आ से आम", e: "🥭" },
+      { l: "इ", w: "इ से इमली", e: "🥨" }, { l: "ई", w: "ई से ईख", e: "🎋" },
+      { l: "उ", w: "उ से उल्लू", e: "🦉" }, { l: "ऊ", w: "ऊ से ऊन", e: "🧶" },
+      { l: "ऋ", w: "ऋ से ऋषि", e: "🧘" }, { l: "ए", w: "ए से एड़ी", e: "🦶" },
+      { l: "ऐ", w: "ऐ से ऐनक", e: "👓" }, { l: "ओ", w: "ओ से ओखली", e: "🥣" },
+      { l: "औ", w: "औ से औरत", e: "👩" }, { l: "अं", w: "अं से अंगूर", e: "🍇" },
+      { l: "अः", w: "अः खाली", e: "😶" },
+      { l: "क", w: "क से कबूतर", e: "🕊️" }, { l: "ख", w: "ख से खरगोश", e: "🐇" },
+      { l: "ग", w: "ग से गमला", e: "🪴" }, { l: "घ", w: "घ से घड़ी", e: "🕰️" },
+      { l: "ङ", w: "ङ खाली", e: "😶" },
+      { l: "च", w: "च से चम्मच", e: "🥄" }, { l: "छ", w: "छ से छाता", e: "☂️" },
+      { l: "ज", w: "ज से जहाज", e: "🚢" }, { l: "झ", w: "झ से झंडा", e: "🇮🇳" },
+      { l: "ञ", w: "ञ खाली", e: "😶" },
+      { l: "ट", w: "ट से टमाटर", e: "🍅" }, { l: "ठ", w: "ठ से ठठेरा", e: "🔨" },
+      { l: "ड", w: "ड से डमरू", e: "🥁" }, { l: "ढ", w: "ढ से ढक्कन", e: "🥘" },
+      { l: "ण", w: "ण खाली", e: "😶" },
+      { l: "त", w: "त से तरबूज", e: "🍉" }, { l: "थ", w: "थ से थर्मस", e: "🍶" },
+      { l: "द", w: "द से दवात", e: "✒️" }, { l: "ध", w: "ध से धनुष", e: "🏹" },
+      { l: "न", w: "न से नल", e: "🚰" },
+      { l: "प", w: "प से पतंग", e: "🪁" }, { l: "फ", w: "फ से फल", e: "🍏" },
+      { l: "ब", w: "ब से बत्तख", e: "🦆" }, { l: "भ", w: "भ से भालू", e: "🐻" },
+      { l: "म", w: "म से मछली", e: "🐟" },
+      { l: "य", w: "य से यज्ञ", e: "🔥" }, { l: "र", w: "र से रथ", e: "🎠" },
+      { l: "ल", w: "ल से लट्टू", e: "🌪️" }, { l: "व", w: "व से वन", e: "🌳" },
+      { l: "श", w: "श से शलजम", e: "🥗" }, { l: "ष", w: "ष से षटकोण", e: "🛑" },
+      { l: "स", w: "स से सेब", e: "🍎" }, { l: "ह", w: "ह से हाथी", e: "🐘" },
+      { l: "क्ष", w: "क्ष से क्षत्रिय", e: "⚔️" }, { l: "त्र", w: "त्र से त्रिशूल", e: "🔱" },
+      { l: "ज्ञ", w: "ज्ञ से ज्ञानी", e: "🧘‍♂️" }
+    ];
+
+    const grid = document.getElementById('grid');
+    const mainLetter = document.getElementById('mainLetter');
+    const mainWord = document.getElementById('mainWord');
+    const mainEmoji = document.getElementById('mainEmoji');
+
+    let isAutoPlaying = false;
+    let currentIndex = 0;
+    let synthesis = window.speechSynthesis;
+    let buttons = [];
+
+    hindiData.forEach((item, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'letter-btn';
+      btn.textContent = item.l;
+      btn.onclick = () => { stopAutoPlay(); playItem(index); };
+      grid.appendChild(btn);
+      buttons.push(btn);
+    });
+
+    function playItem(index) {
+      if (index >= hindiData.length) { stopAutoPlay(); return; }
+
+      currentIndex = index;
+      const data = hindiData[index];
+
+      mainLetter.textContent = data.l;
+      mainWord.textContent = data.w;
+      mainEmoji.textContent = data.e;
+
+      buttons.forEach(b => b.classList.remove('active'));
+      buttons[index].classList.add('active');
+      buttons[index].scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+      // Teacher Speaks
+      speak(data.w, 1.0, 0.9, () => {
+        if (!isAutoPlaying && index !== currentIndex) return;
+        setTimeout(() => {
+          // Kids Repeat (Higher Pitch)
+          speak(data.w, 1.4, 1.0, () => {
+            if (isAutoPlaying) {
+              setTimeout(() => playItem(index + 1), 700);
+            }
+          });
+        }, 300);
+      });
+    }
+
+    function speak(text, pitch, rate, callback) {
+      synthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'hi-IN';
+      u.pitch = pitch;
+      u.rate = rate;
+      u.onend = function() { if (callback) callback(); };
+      synthesis.speak(u);
+    }
+
+    function startAutoPlay() {
+      if (isAutoPlaying) return;
+      isAutoPlaying = true;
+      currentIndex = 0;
+      playItem(0);
+    }
+
+    function stopAutoPlay() {
+      isAutoPlaying = false;
+      synthesis.cancel();
+      buttons.forEach(b => b.classList.remove('active'));
+    }
+  </script>
+</body>
+</html>

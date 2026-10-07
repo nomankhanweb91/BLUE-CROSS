@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Super Racing Pro — BLUE CROSS Kids Games</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin: 0;
+      background: #F4FAFF;
+      font-family: system-ui, -apple-system, sans-serif;
+      text-align: center;
+      color: #172B3A;
+      overflow-x: hidden;
+    }
+    .game-page-header {
+      background: #FFFFFF;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border-bottom: 1px solid #E1EDF5;
+    }
+    .game-arena {
+      max-width: 440px;
+      margin: 15px auto;
+      background: #FFFFFF;
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(22,136,232,0.12);
+      border: 2px solid #E1EDF5;
+      position: relative;
+    }
+    #gameCanvas {
+      background: #334155;
+      display: block;
+      margin: 0 auto;
+      border-radius: 12px;
+      border-left: 6px dashed #FCD34D;
+      border-right: 6px dashed #FCD34D;
+      max-width: 100%;
+    }
+    .hud-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 8px 16px;
+      background: #EEF7FF;
+      border-radius: 12px;
+      font-weight: 700;
+      color: #1688E8;
+    }
+    .controls {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
+      gap: 15px;
+    }
+    .btn-drive {
+      flex: 1;
+      height: 65px;
+      background: #1688E8;
+      border-radius: 16px;
+      border: none;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      user-select: none;
+      touch-action: manipulation;
+      box-shadow: 0 4px 12px rgba(22,136,232,0.3);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .btn-drive:active {
+      transform: scale(0.95);
+      background: #0D6EFD;
+    }
+    .info-tips {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: #5F7180;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="game-page-header">
+    <a href="games.html" class="btn btn-outline btn-sm">← Back to Games</a>
+    <div style="font-weight: 800; color: #1688E8; font-size: 1.15rem;">🏎️ Super Racing Pro</div>
+    <a href="learning.html" class="btn btn-primary btn-sm">Learning Hub</a>
+  </header>
+
+  <div class="game-arena">
+    <div class="hud-bar">
+      <div id="scoreDisplay">Score: 0</div>
+      <div id="speedDisplay" style="color: #F59E0B;">Speed: Normal</div>
+      <button class="btn btn-outline btn-sm" onclick="restartGame()" style="padding: 4px 10px;">🔄 Restart</button>
+    </div>
+
+    <canvas id="gameCanvas" width="380" height="480"></canvas>
+
+    <div class="controls">
+      <button class="btn-drive" id="leftBtn" aria-label="Turn Left">◀ LEFT</button>
+      <button class="btn-drive" id="rightBtn" aria-label="Turn Right">RIGHT ▶</button>
+    </div>
+
+    <div class="info-tips">
+      Tip: On desktop, use <strong>Left/Right Arrow Keys</strong> to steer. Avoid the red obstacle cars!
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const scoreElement = document.getElementById("scoreDisplay");
+    const speedElement = document.getElementById("speedDisplay");
+
+    let score = 0;
+    let gameActive = true;
+    let speed = 4;
+    let roadOffset = 0;
+
+    // Player Car
+    const player = {
+      x: canvas.width / 2 - 25,
+      y: canvas.height - 100,
+      w: 48,
+      h: 75,
+      color: "#10B981"
+    };
+
+    // Enemy Cars
+    let enemies = [];
+    function createEnemy() {
+      const lane = Math.floor(Math.random() * 3);
+      const laneWidth = canvas.width / 3;
+      enemies.push({
+        x: lane * laneWidth + (laneWidth - 46) / 2,
+        y: -90,
+        w: 46,
+        h: 70,
+        color: "#EF4444"
+      });
+    }
+
+    // Controls
+    let moveLeft = false;
+    let moveRight = false;
+
+    const leftBtn = document.getElementById("leftBtn");
+    const rightBtn = document.getElementById("rightBtn");
+
+    leftBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveLeft = true; });
+    leftBtn.addEventListener("touchend", (e) => { e.preventDefault(); moveLeft = false; });
+    leftBtn.addEventListener("mousedown", () => moveLeft = true);
+    leftBtn.addEventListener("mouseup", () => moveLeft = false);
+
+    rightBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveRight = true; });
+    rightBtn.addEventListener("touchend", (e) => { e.preventDefault(); moveRight = false; });
+    rightBtn.addEventListener("mousedown", () => moveRight = true);
+    rightBtn.addEventListener("mouseup", () => moveRight = false);
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") moveLeft = true;
+      if (e.key === "ArrowRight") moveRight = true;
+    });
+
+    window.addEventListener("keyup", (e) => {
+      if (e.key === "ArrowLeft") moveLeft = false;
+      if (e.key === "ArrowRight") moveRight = false;
+    });
+
+    function restartGame() {
+      score = 0;
+      speed = 4;
+      enemies = [];
+      gameActive = true;
+      player.x = canvas.width / 2 - 25;
+      scoreElement.innerText = "Score: 0";
+      speedElement.innerText = "Speed: Normal";
+      requestAnimationFrame(gameLoop);
+    }
+
+    function update() {
+      if (!gameActive) return;
+
+      if (moveLeft && player.x > 10) player.x -= 6;
+      if (moveRight && player.x < canvas.width - player.w - 10) player.x += 6;
+
+      roadOffset = (roadOffset + speed) % 40;
+
+      if (Math.random() < 0.025 && enemies.length < 3) {
+        createEnemy();
+      }
+
+      for (let i = enemies.length - 1; i >= 0; i--) {
+        const en = enemies[i];
+        en.y += speed;
+
+        // Collision Detection
+        if (
+          player.x < en.x + en.w &&
+          player.x + player.w > en.x &&
+          player.y < en.y + en.h &&
+          player.y + player.h > en.y
+        ) {
+          gameActive = false;
+          setTimeout(() => {
+            alert("💥 Great Race! Final Score: " + score);
+          }, 50);
+          return;
+        }
+
+        if (en.y > canvas.height) {
+          enemies.splice(i, 1);
+          score++;
+          scoreElement.innerText = "Score: " + score;
+          if (score % 5 === 0) {
+            speed += 0.4;
+            speedElement.innerText = "Speed: " + speed.toFixed(1) + "x";
+          }
+        }
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Road background
+      ctx.fillStyle = "#1E293B";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Road Lines (Dashed white separators)
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.7)";
+      ctx.lineWidth = 4;
+      ctx.setLineDash([20, 20]);
+      ctx.lineDashOffset = -roadOffset;
+
+      ctx.beginPath();
+      ctx.moveTo(canvas.width / 3, 0);
+      ctx.lineTo(canvas.width / 3, canvas.height);
+      ctx.moveTo((2 * canvas.width) / 3, 0);
+      ctx.lineTo((2 * canvas.width) / 3, canvas.height);
+      ctx.stroke();
+
+      // Draw Player Car (Green Sporty)
+      drawCar(player.x, player.y, player.w, player.h, player.color, true);
+
+      // Draw Enemies
+      enemies.forEach((en) => {
+        drawCar(en.x, en.y, en.w, en.h, en.color, false);
+      });
+
+      if (!gameActive) {
+        ctx.fillStyle = "rgba(0,0,0,0.6)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#FFFFFF";
+        ctx.font = "bold 26px system-ui";
+        ctx.textAlign = "center";
+        ctx.fillText("GAME OVER!", canvas.width / 2, canvas.height / 2 - 20);
+        ctx.font = "18px system-ui";
+        ctx.fillText("Score: " + score, canvas.width / 2, canvas.height / 2 + 15);
+        ctx.fillStyle = "#FCD34D";
+        ctx.fillText("Tap Restart to Play Again", canvas.width / 2, canvas.height / 2 + 45);
+      }
+    }
+
+    function drawCar(x, y, w, h, color, isPlayer) {
+      // Body
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.roundRect(x, y, w, h, [12, 12, 8, 8]);
+      ctx.fill();
+
+      // Roof / Cabin
+      ctx.fillStyle = "#0F172A";
+      ctx.beginPath();
+      ctx.roundRect(x + 6, y + (isPlayer ? 18 : 22), w - 12, h - 38, [6, 6, 6, 6]);
+      ctx.fill();
+
+      // Headlights
+      ctx.fillStyle = isPlayer ? "#FEF08A" : "#FCA5A5";
+      ctx.fillRect(x + 4, isPlayer ? y + 2 : y + h - 6, 8, 4);
+      ctx.fillRect(x + w - 12, isPlayer ? y + 2 : y + h - 6, 8, 4);
+
+      // Wheels
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(x - 3, y + 10, 5, 14);
+      ctx.fillRect(x + w - 2, y + 10, 5, 14);
+      ctx.fillRect(x - 3, y + h - 24, 5, 14);
+      ctx.fillRect(x + w - 2, y + h - 24, 5, 14);
+    }
+
+    function gameLoop() {
+      update();
+      draw();
+      if (gameActive) {
+        requestAnimationFrame(gameLoop);
+      }
+    }
+
+    requestAnimationFrame(gameLoop);
+  </script>
+</body>
+</html>

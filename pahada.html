@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2 का पहाड़ा (Table of 2 &amp; Tables) — BLUE CROSS Math</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-color: #F4FAFF;
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .pahada-header {
+      width: 100%;
+      background: #FFFFFF;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #E1EDF5;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      box-sizing: border-box;
+      z-index: 20;
+    }
+    .table-tabs {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .table-tab-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid #C5E3FB;
+      background: #FFFFFF;
+      color: #1688E8;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .table-tab-btn.active {
+      background: #1688E8;
+      color: #FFFFFF;
+      border-color: #1688E8;
+    }
+    .container-box {
+      text-align: center;
+      background: #FFFFFF;
+      padding: 24px;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(22,136,232,0.12);
+      width: min(440px, 92vw);
+      border: 3px solid #E1EDF5;
+      margin: 10px 0 24px;
+      box-sizing: border-box;
+    }
+    h1 {
+      color: #1688E8;
+      margin: 0 0 4px;
+      font-size: 26px;
+    }
+    .display-box {
+      background-color: #F4F9FD;
+      border-radius: 18px;
+      padding: 20px;
+      margin: 18px 0;
+      border: 2px dashed #93C5FD;
+    }
+    #math-text {
+      font-size: 46px;
+      font-weight: 900;
+      color: #172B3A;
+      margin: 0;
+    }
+    #hindi-text {
+      font-size: 24px;
+      color: #E11D48;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .balls-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+      min-height: 60px;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+    .ball {
+      width: 22px;
+      height: 22px;
+      background-color: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(16,185,129,0.3);
+      animation: bounce 0.5s infinite alternate;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .btn-table {
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background-color: #1688E8;
+      color: white;
+      flex: 1;
+      font-weight: bold;
+      transition: 0.15s;
+    }
+    .btn-table:active { transform: scale(0.96); }
+    #autoBtn {
+      background-color: #F59E0B;
+      width: 100%;
+      font-weight: bold;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+    }
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-6px); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="pahada-header">
+    <a href="learning.html" class="btn btn-outline btn-sm">← Back to Learning</a>
+    <div style="font-weight: 800; color: #1688E8; font-size: 1.15rem;">🔢 गणित पहाड़ा (Tables)</div>
+    <a href="numbers.html" class="btn btn-primary btn-sm">Numbers 1-100</a>
+  </header>
+
+  <div class="table-tabs">
+    <button class="table-tab-btn active" onclick="switchTable(2, this)">2 का पहाड़ा</button>
+    <button class="table-tab-btn" onclick="switchTable(3, this)">3 का पहाड़ा</button>
+    <button class="table-tab-btn" onclick="switchTable(5, this)">5 का पहाड़ा</button>
+    <button class="table-tab-btn" onclick="switchTable(10, this)">10 का पहाड़ा</button>
+  </div>
+
+  <div class="container-box">
+    <h1 id="tableTitle">2 का पहाड़ा 🔢</h1>
+
+    <div class="display-box">
+      <div id="math-text">2 x 1 = 2</div>
+      <div id="hindi-text">Do ekam Do</div>
+      <div class="balls-container" id="ballsArea"></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-table" onclick="prevStep()">⬅ पीछे</button>
+      <button class="btn-table" style="background: #10B981;" onclick="speakCurrent()">🔊 सुनो</button>
+      <button class="btn-table" onclick="nextStep()">आगे ➡</button>
+    </div>
+
+    <button id="autoBtn" onclick="toggleAutoPlay()">▶ Auto Play (शुरू करें)</button>
+  </div>
+
+  <div style="color: #5F7180; font-size: 0.95rem; text-align: center; margin-bottom: 24px;">
+    💡 टिप: "Auto Play" पर क्लिक करें, पहाड़ा अपने आप आवाज़ और गिनने वाली गेंदों के साथ चलेगा!
+  </div>
+
+  <script>
+    const tablesDB = {
+      2: [
+        { math: "2 x 1 = 2", hindi: "Do ekam Do", count: 2 },
+        { math: "2 x 2 = 4", hindi: "Do duni Chaar", count: 4 },
+        { math: "2 x 3 = 6", hindi: "Do tiya Chhe", count: 6 },
+        { math: "2 x 4 = 8", hindi: "Do chauke Aath", count: 8 },
+        { math: "2 x 5 = 10", hindi: "Do panje Das", count: 10 },
+        { math: "2 x 6 = 12", hindi: "Do chhakke Baarah", count: 12 },
+        { math: "2 x 7 = 14", hindi: "Do satte Chaudah", count: 14 },
+        { math: "2 x 8 = 16", hindi: "Do atthe Solah", count: 16 },
+        { math: "2 x 9 = 18", hindi: "Do navve Atthara", count: 18 },
+        { math: "2 x 10 = 20", hindi: "Do daa-ham Bees", count: 20 }
+      ],
+      3: [
+        { math: "3 x 1 = 3", hindi: "Teen ekam Teen", count: 3 },
+        { math: "3 x 2 = 6", hindi: "Teen duni Chhe", count: 6 },
+        { math: "3 x 3 = 9", hindi: "Teen tiya Nau", count: 9 },
+        { math: "3 x 4 = 12", hindi: "Teen chauke Baarah", count: 12 },
+        { math: "3 x 5 = 15", hindi: "Teen panje Pandrah", count: 15 },
+        { math: "3 x 6 = 18", hindi: "Teen chhakke Atthara", count: 18 },
+        { math: "3 x 7 = 21", hindi: "Teen satte Ikkees", count: 21 },
+        { math: "3 x 8 = 24", hindi: "Teen atthe Chaubees", count: 24 },
+        { math: "3 x 9 = 27", hindi: "Teen navve Sattaees", count: 27 },
+        { math: "3 x 10 = 30", hindi: "Teen daa-ham Tees", count: 30 }
+      ],
+      5: [
+        { math: "5 x 1 = 5", hindi: "Paanch ekam Paanch", count: 5 },
+        { math: "5 x 2 = 10", hindi: "Paanch duni Das", count: 10 },
+        { math: "5 x 3 = 15", hindi: "Paanch tiya Pandrah", count: 15 },
+        { math: "5 x 4 = 20", hindi: "Paanch chauke Bees", count: 20 },
+        { math: "5 x 5 = 25", hindi: "Paanch panje Pachchees", count: 25 },
+        { math: "5 x 6 = 30", hindi: "Paanch chhakke Tees", count: 30 },
+        { math: "5 x 7 = 35", hindi: "Paanch satte Paintees", count: 35 },
+        { math: "5 x 8 = 40", hindi: "Paanch atthe Chaalees", count: 40 },
+        { math: "5 x 9 = 45", hindi: "Paanch navve Paintaalees", count: 45 },
+        { math: "5 x 10 = 50", hindi: "Paanch daa-ham Pachaas", count: 50 }
+      ],
+      10: [
+        { math: "10 x 1 = 10", hindi: "Das ekam Das", count: 10 },
+        { math: "10 x 2 = 20", hindi: "Das duni Bees", count: 20 },
+        { math: "10 x 3 = 30", hindi: "Das tiya Tees", count: 30 },
+        { math: "10 x 4 = 40", hindi: "Das chauke Chaalees", count: 40 },
+        { math: "10 x 5 = 50", hindi: "Das panje Pachaas", count: 50 },
+        { math: "10 x 6 = 60", hindi: "Das chhakke Saath", count: 60 },
+        { math: "10 x 7 = 70", hindi: "Das satte Sattar", count: 70 },
+        { math: "10 x 8 = 80", hindi: "Das atthe Assi", count: 80 },
+        { math: "10 x 9 = 90", hindi: "Das navve Nabbe", count: 90 },
+        { math: "10 x 10 = 100", hindi: "Das daa-ham Sau", count: 100 }
+      ]
+    };
+
+    let currentTableNum = 2;
+    let index = 0;
+    let autoInterval = null;
+
+    const mathEl = document.getElementById("math-text");
+    const hindiEl = document.getElementById("hindi-text");
+    const ballsEl = document.getElementById("ballsArea");
+    const titleEl = document.getElementById("tableTitle");
+
+    function switchTable(num, btn) {
+      if (autoInterval) toggleAutoPlay();
+      currentTableNum = num;
+      index = 0;
+      document.querySelectorAll('.table-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      titleEl.innerText = `${num} का पहाड़ा 🔢`;
+      updateScreen(false);
+    }
+
+    function updateScreen(shouldSpeak = true) {
+      const data = tablesDB[currentTableNum];
+      const item = data[index];
+      mathEl.innerText = item.math;
+      hindiEl.innerText = item.hindi;
+
+      ballsEl.innerHTML = "";
+      const displayCount = Math.min(item.count, 40);
+      for (let i = 0; i < displayCount; i++) {
+        let ball = document.createElement("div");
+        ball.className = "ball";
+        ballsEl.appendChild(ball);
+      }
+
+      if (shouldSpeak) {
+        speakCurrent();
+      }
+    }
+
+    function speakCurrent() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const data = tablesDB[currentTableNum];
+        const item = data[index];
+        const msg = new SpeechSynthesisUtterance(item.hindi);
+        msg.lang = 'hi-IN';
+        msg.rate = 0.85;
+        window.speechSynthesis.speak(msg);
+      }
+    }
+
+    function nextStep() {
+      const data = tablesDB[currentTableNum];
+      index++;
+      if (index >= data.length) index = 0;
+      updateScreen();
+    }
+
+    function prevStep() {
+      const data = tablesDB[currentTableNum];
+      index--;
+      if (index < 0) index = data.length - 1;
+      updateScreen();
+    }
+
+    function toggleAutoPlay() {
+      const btn = document.getElementById("autoBtn");
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+        btn.innerText = "▶ Auto Play (शुरू करें)";
+        btn.style.backgroundColor = "#F59E0B";
+      } else {
+        btn.innerText = "⏹ Roko (Stop)";
+        btn.style.backgroundColor = "#EF4444";
+        updateScreen(true);
+        autoInterval = setInterval(() => {
+          nextStep();
+        }, 3200);
+      }
+    }
+
+    updateScreen(false);
+  </script>
+</body>
+</html>
